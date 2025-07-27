@@ -1,6 +1,6 @@
-# `nanocharts` docs-site
+# `toomanycharts` docs-site
 
-This is a documentation site for the npm library [`nanocharts`](https://github.com/DanteASC4/NanoCharts), and was created with the awesome [Fumadocs](https://github.com/fuma-nama/fumadocs) framework, powered by nextjs.
+This is a documentation site for the npm library [`toomanycharts`](https://github.com/DanteASC4/toomanycharts), and was created with the awesome [Fumadocs](https://github.com/fuma-nama/fumadocs) framework, powered by nextjs.
 
 Run development server:
 

@@ -160,7 +160,7 @@ barchart({
 
 ## Animation
 
-Because nanocharts outputs SVG elements, they can be animated! The <u className="text-purple-500 font-bold">caveat</u> is that to animate the individual bars, depending on what sort of animation you want to do, you'll need to change the `transform-origin` for bars after the charts created based on which side they're on. Which sounds more complicated than it is!
+Because toomanycharts outputs SVG elements, they can be animated! The <u className="text-purple-500 font-bold">caveat</u> is that to animate the individual bars, depending on what sort of animation you want to do, you'll need to change the `transform-origin` for bars after the charts created based on which side they're on. Which sounds more complicated than it is!
 
 ### Animejs
 
@@ -179,7 +179,7 @@ app.appendChild(addMyChart);
 ```ts tab="script.ts" lineNumbers
 // script.ts
 import { animate, utils } from 'animejs';
-import { barchart } from 'nanocharts';
+import { barchart } from 'toomanycharts';
 
 const growBars = () => {
   utils.set('.el-bar', {
@@ -284,10 +284,10 @@ All that being said, the `transform-origin` is only relevant when you're moving 
 Regardless, here's a table & visual guide for all placement options!
 
 | placement | `transformOrigin` keywords |
-| --------- | ------------------------ |
-| "top"     | "top center"             |
-| "right"   | "right center"           |
-| "bottom"  | "bottom center"          |
-| "left"    | "left center"            |
+| --------- | -------------------------- |
+| "top"     | "top center"               |
+| "right"   | "right center"             |
+| "bottom"  | "bottom center"            |
+| "left"    | "left center"              |
 
 ![A visual guide of the above table](/imgs/examples/barchart/visual-guide.png)

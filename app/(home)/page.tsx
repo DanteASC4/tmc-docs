@@ -1,8 +1,9 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Nanocharts - Lightweight SVG Charts',
-  description: 'Landing page for Nanocharts, a lightweight SVG chart library.',
+  title: 'toomanycharts - Lightweight SVG Charts',
+  description:
+    'Landing page for toomanycharts, a lightweight SVG chart library.',
 };
 
 export default function HomePage() {
@@ -13,7 +14,7 @@ export default function HomePage() {
         viewBox="0 0 300 125"
         height="125"
         width="300"
-        className="size-12">
+        className="size-24">
         <defs>
           <linearGradient gradientTransform="rotate(90,0.5,0.5)" id="kNzTu0So">
             <stop stopColor="#00ffff" offset="0%" />
@@ -53,7 +54,7 @@ export default function HomePage() {
           <text y="116" x="262.5" fill="transparent" />
         </g>
       </svg>
-      <h1 className="mb-4 text-2xl font-bold">Nanocharts</h1>
+      <h1 className="mb-4 text-2xl font-bold">TooManyCharts</h1>
       <p className="text-fd-muted-foreground">
         <Link
           href="/docs"

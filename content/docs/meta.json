@@ -1,11 +1,11 @@
 {
   "title": "The Lib",
-  "description": "All Things NanoCharts",
+  "description": "All Things TooManyCharts",
   "root": true,
   "pages": [
     "---Introduction---",
     "index",
-    "why-nanocharts",
+    "why-toomanycharts",
     "roadmap",
     "---Usage---",
     "...",
