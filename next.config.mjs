@@ -7,8 +7,8 @@ const config = {
   reactStrictMode: true,
   output: 'export',
   images: { unoptimized: true },
-  basePath: '/NanoCharts',
-  assetPrefix: '/NanoCharts/',
+  basePath: '/NanoCharts/docs',
+  assetPrefix: '/NanoCharts/docs/',
 };
 
 export default withMDX(config);
