@@ -1,0 +1,15 @@
+{
+  "title": "The Lib",
+  "description": "All Things NanoCharts",
+  "root": true,
+  "pages": [
+    "---Introduction---",
+    "index",
+    "why-nanocharts",
+    "roadmap",
+    "---Usage---",
+    "...",
+    "(charts api)",
+    "(examples)"
+  ]
+}

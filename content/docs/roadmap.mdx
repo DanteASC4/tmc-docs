@@ -1,0 +1,104 @@
+---
+title: Roadmap
+description: Where're things heading?
+---
+
+So just as an initial disclaimer, this is not set in stone, and there's no definitive dates for when or if pieces of what's here will arrive. Which I know might be a bit disappointing, but this whole thing is just me as of now, and while I'd like to make time for it - things don't always go the way you want day to day. Instead of a concrete roadmap, this is more of a ideas page, with a few categories - **definite,** **maybe,** and **no**. And one section of things I'm going to definitely not do!
+
+## Definite
+
+These are things I definitely am aiming to add and are either up next or coming soon.
+
+### Stacked Bar Chart
+
+From the start I've wanted to do more than just barcharts. A stacked bar chart would be simple to implement since it's the same logic as a bar chart, except you're construction each bar from a couple bars.
+
+But I don't want to get too sucked into things here before moving on to other things.
+
+#### Line Chart
+
+I do plan to add line charts, but these'll be after I get to some other things!
+
+### Framework Specific Exports
+
+Framework specific exports like `import { barchart } from 'nanocharts/svelte'` I think would be great as it could allow for framework specific utilization. I'm not 100% sure how this works, but I know this is nearly a requirement for usage for a lot of things I bet.
+
+I'm thinking of the following frameworks, in this order to start:
+
+- `svelte`
+- `react`
+- `solid`
+- `vue`
+- `angular`
+
+### Accessibility
+
+I'm not an expert on accessibility but I believe it wouldn't be a huge amount of work, and would be nice to have! More research needed here on what meaningful accessibility pieces can be added.
+
+### Additional Options
+
+There's already quite a few different options available, and I plan to add some more. I don't want to get too crazy with it, because I can see that being an issue but there'll probably be some more.
+
+At the very least I plan to do my best documenting everything clearly and provide examples of everything, while maintaining the core simple chart functionality.
+
+I've also intentionally left out some options, like `stroke`, why? Because it's possible to control via CSS and I think using CSS for some more of the visual aspect of things may be better in the long run anyway.
+
+---
+
+## Maybe
+
+These are things I'm considering, but not necessarily committed to.
+
+### "Plugins" ?
+
+Chart.JS & some other libraries do this, but it's basically like small bits of additional functionality that are optional. It could look something like:
+
+```ts
+const chart = barchart({
+  // ...
+  plugins: [addLegend()],
+});
+```
+
+or something like that. But I've had a couple ideas pop in my head that sound nice but also out of scope for the core goal of the lib. In no particular order here's a couple:
+
+- legend
+  - Would auto-generate a legend to go along with the chart, likely utilizing `<fieldset>`!
+- hover
+  - Some sort of hover-tooltip for visuals, likely utilizing the new popover API. Ideally would use, anchor-positioning but not enough browser support for that just yet.
+- click-to-save
+  - A small button(s) would be tacked onto resulting charts that'd allow for saving the chart as a `png` or `svg`
+  - This would be pretty easy to do as well I think, considering making this part of the core lib but leaving it here for now
+
+### ASCII / CLI support
+
+This is definitely a tougher thing to tackle, but I personally love terminals, and would really like to be able to spit out ASCII charts for TUIs!
+
+I do have an idea in mind utilizing some modern-terminal tricks, but we'll see!
+
+### Additional Chart Types
+
+There are many types of charts out there, and while some are definitely too complex I can think of a few that'd be doable! Here's a couple in no particular order
+
+- Histograms
+- Mirrored bar charts
+- Pie charts
+- Scatter plots
+- Radar charts
+- Pie / Donut charts
+
+### Themes
+
+Not really a priority at all now, but it'd be easy to tack on some predefined 'themes' in the form of color palettes. This is also something that might be added in the core lib in the future if it's simple & has a small footprint.
+
+---
+
+## No
+
+These are things that I've considered and decided against. Which for now is just one thing, but this list may grow larger.
+
+### Animations
+
+This may be a bit surprising, but animations are their own can of worms. Animating things in all sorts of ways on the web is actually one of, if not my favorite thing to do in the vast world of web dev. But having that built-into the library feels like it'd be doing way too much.
+
+Additionally, because of the nature of inlined SVGs, they should play nicely with existing animation engines. In fact I plan to include some examples of doing exactly that later!

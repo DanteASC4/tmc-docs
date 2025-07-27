@@ -1,13 +1,95 @@
 ---
-title: Hello World
-description: Your first document
+title: Quick Start
+description: Your first nanochart
+icon: Album
 ---
 
-Welcome to the docs! You can start writing documents in `/content/docs`.
+# Introduction
 
-## What is Next?
+Nanocharts is a lightweight, work-in-progress, clientside & soon to be ssr-friendly library built with deno to rapidly create inline SVG charts with minimal overhead.
+
+<Callout title="Want a more in-depth explanation?">
+  Head over to the [Why nanocharts](/docs/why-nanocharts) page to learn more
+  about the motivation & purpose of nanocharts.
+</Callout>
+
+# Quick Start
+
+Getting your first chart as soon as possible!
+
+## Installation
+
+```bash tab="npm"
+npm install nanocharts
+```
+
+```bash tab="pnpm"
+pnpm install nanocharts
+```
+
+```bash tab="yarn"
+yarn add nanocharts
+```
+
+```bash tab="bun"
+bun install nanocharts
+```
+
+```bash tab="deno"
+deno install jsr:@nanocharts/nanocharts
+```
+
+## Usage
+
+All that's needed to create a simple bar chart:
+
+```ts
+const myChart = barchart({
+  data: [50, 100, 30],
+});
+
+if (myChart) document.body.appendChild(myChart);
+```
+
+Will result in a chart like so:
+
+![The First Chart](/imgs/intro-c1.svg)
+
+<span className="text-xs italic">
+  Ironically, not inlined here (as of now) because turbopack was complaining
+  about it causing a hydration mismatch.
+</span>
+
+### Keep Going
+
+Add some labels:
+
+```ts
+barchart({
+  data: [50, 100, 30],
+  labels: ['1st', '2nd', '3rd'],
+});
+```
+
+![Second intro chart, with labels](/imgs/intro-c2.svg)
+
+Place it on the top instead:
+
+```ts
+barchart({
+  data: [50, 100, 30],
+  labels: ['1st', '2nd', '3rd'],
+  placement: 'top',
+});
+```
+
+![Third intro chart, with labels & placed on the top](/imgs/intro-c2.svg)
+
+## What Next?
 
 <Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
+  <Card title="Explore all the options" href="/docs/charts/barchart" />
+  <Card title="Check out a ton of example usage" href="/docs/examples" />
+  <Card title="Open an Issue" href="#" />
+  <Card title="Explode!" href="#" />
 </Cards>

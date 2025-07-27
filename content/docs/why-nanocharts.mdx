@@ -1,0 +1,63 @@
+---
+title: Why Nanocharts?
+description: What's the point of this library?
+---
+
+# Motivation
+
+<Card>
+  <div>
+    <span className="text-xl">Chart</span> <br />
+    <span className="text-xs text-gray-500">/CHärt/</span>> a sheet of information
+    in the form of a table, graph, or diagram.
+  </div>
+</Card>
+
+It's no secret that there are already many, time-tested libraries & tools out there capable of making highly complex, beautiful charts & more - many offer a multitude of data visualization options.
+
+Some of my favorites:
+
+- [Chart.js](https://www.chartjs.org/)
+  - a feature rich, modular library for crafting many types of charts with tons of options
+- [d3.js](https://d3js.org/)
+  - one of the most powerful data visualization options out there, going way beyond charts
+- [ApexCharts.js](https://apexcharts.com/)
+  - a nice and cohesive chart creation lib with everything you need to create a range of charts
+  - <span className="text-xs italic">
+      {' '}
+      I used this way back in the day where it was totally free - looks like they
+      have an enterprise paid license now, good for them!
+    </span>
+
+I have fun making any sort of visuals, and a good visual can really say a lot! But you know what else I've really come to appreciate? Simplicity! And while not a library, I do find myself utilizing google sheets quite a bit, and I came across the `SPARKLINE` function.
+
+While I haven't had a ton of opportunities as of late to utilize it, I was impressed by how simple it could be to use, and how much it could add in terms of conveying information. Let's look at some examples.
+
+Consider that you have the following dataset:
+![A few columns of data in google sheets, labeled day1-day7 with the data: 100,200,300,100,50,350,300](/imgs/sheets_p1.png)
+
+Now if you wanted a sense of how the data was trending, or changing over those cells you need to read each one to get that sense, which is fine. But what if you had 30 different columns, or what if the exact values weren't important? Or you just want to speed up that process?
+
+Well this would help you glean that same information much quicker:
+
+![A line graph showing the trend in the data, based on the afore mentioned values](/imgs/sheets_p2.png)
+
+<span className="text-xs italic">
+  I know it's not a bar chart, we'll get there!
+</span>
+
+If you've used sheets before, you know making a chart is typically possible though not always the most cohesive experience. You highlight your data, go to "insert", choose "chart" then the type, and configure the various options. Which isn't terrible, it can also do more - but sometimes less is more.
+
+So that line graph though is within it's own cell, not floating on the sheet. And how does `SPARKLINE` come into play? Well, that's all it takes!
+
+![An image showing the full dataset, line graph, and formula value for `SPARKLINE`, which takes only the range of cells as a value](/imgs/sheets_p3.png)
+
+Not a bar chart, but we can make it one with just a little bit of configuration:
+
+![An image showing the same things as before, except the line chart is now a bar chart](/imgs/sheets_p4.png)
+
+Just by adding that second argument, `{"charttype","column"}` it's a whole different visual! But that's not all it can do, there's a bunch more configuration options, and even a couple more chart types <sup>[docs here!](https://support.google.com/docs/answer/3093289?hl=en)</sup> and that sort of "effort in" to "value out" is what I'm aiming for here.
+
+So why nanocharts? Time! I hope to create something that saves developers time,I want a library that can make meaningful simple charts, with trivial effort required. I hope this library is something more of a useful tool for quick & simple chart creation, whether it be a small panel in an admin dashboard, a placeholder until there's time to create a better chart, or even a debugging tool.
+
+If you're curious of what's to come, check out the [Roadmap](/docs/roadmap) page for what I'm thinking of what's to come.
