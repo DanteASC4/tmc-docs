@@ -7,6 +7,8 @@ const config = {
   reactStrictMode: true,
   output: 'export',
   images: { unoptimized: true },
+  basePath: '/docs',
+  assetPrefix: '/docs/',
 };
 
 export default withMDX(config);
