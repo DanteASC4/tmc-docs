@@ -45,53 +45,18 @@ export const baseOptions: BaseLayoutProps = {
               x="0"
             />
             <g className="nc-bargroup">
-              <rect
-                title="Bar value of 100"
-                height="100"
-                width="30"
-                y="0"
-                x="15"
-                fill="transparent"
-              />
-              <rect
-                title="Bar value of 97"
-                height="97"
-                width="30"
-                y="0"
-                x="75"
-                fill="transparent"
-              />
-              <rect
-                title="Bar value of 110"
-                height="110"
-                width="30"
-                y="0"
-                x="135"
-                fill="transparent"
-              />
-              <rect
-                title="Bar value of 116"
-                height="116"
-                width="30"
-                y="0"
-                x="195"
-                fill="transparent"
-              />
-              <rect
-                title="Bar value of 101"
-                height="101"
-                width="30"
-                y="0"
-                x="255"
-                fill="transparent"
-              />
+              <rect height="100" width="30" y="0" x="15" fill="transparent" />
+              <rect height="97" width="30" y="0" x="75" fill="transparent" />
+              <rect height="110" width="30" y="0" x="135" fill="transparent" />
+              <rect height="116" width="30" y="0" x="195" fill="transparent" />
+              <rect height="101" width="30" y="0" x="255" fill="transparent" />
             </g>
             <g className="nc-textgroup">
-              <text title="Bar label" y="115" x="22.5" fill="transparent" />
-              <text title="Bar label" y="112" x="82.5" fill="transparent" />
-              <text title="Bar label" y="125" x="142.5" fill="transparent" />
-              <text title="Bar label" y="131" x="202.5" fill="transparent" />
-              <text title="Bar label" y="116" x="262.5" fill="transparent" />
+              <text y="115" x="22.5" fill="transparent" />
+              <text y="112" x="82.5" fill="transparent" />
+              <text y="125" x="142.5" fill="transparent" />
+              <text y="131" x="202.5" fill="transparent" />
+              <text y="116" x="262.5" fill="transparent" />
             </g>
           </svg>
         </div>
