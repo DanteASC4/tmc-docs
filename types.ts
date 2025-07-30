@@ -12,14 +12,13 @@ export type Prettify<T> = {
 } & {};
 
 export type ChartOptions = {
-  // min: number;
-	/**
-	 * Defaults to `300`
-	 */
+  /**
+   * Defaults to `300`
+   */
   height: number;
-	/**
-	 * Defaults to `300`
-	 */
+  /**
+   * Defaults to `300`
+   */
   width: number;
 };
 
@@ -36,9 +35,9 @@ export type BarChartClasses = {
   groupClass: string;
   parentClass: string;
   barClass: string;
-  textClass: string;
+  labelClass: string;
   barGroupClass: string;
-  textGroupClass: string;
+  labelGroupClass: string;
 };
 
 export type BarChartOptionsBase = {
@@ -71,9 +70,16 @@ export type BarChartOptionsBase = {
    */
   gap: number;
   /**
-   * Defaults to `#ffffff` when no color array is provided.
+   * Defaults to `#ffffff`
    */
   colors: string[];
+  /**
+   * Defaults to `#ffffff`
+   */
+  labelColors: string[];
+  /**
+   * !?
+   */
   gradientColors: string[];
   /**
    * Defaults to `"individual"` when `gradientColors` is supplied but no `gradientMode` is given.
@@ -86,33 +92,27 @@ export type BarChartOptionsBase = {
 } & BarChartClasses &
   ChartOptions;
 
-// type BarChartData = BarChartOptionsBase["type"] extends "numerical"
-// 	? number[]
-// 	: number[][];
-
 export type BarChartLabels = string[];
 
 export type BarChartNumericalOpts = Optional<BarChartOptionsBase> & {
-  // type?: "numerical";
   readonly data: number[];
-	/**
-	 * Defaults to `[]` which is a chart with no labels
-	 */
+  /**
+   * Defaults to `[]` which is a chart with no labels
+   */
   readonly labels?: BarChartLabels;
 };
 
 export type BarChartStackedOpts = Optional<BarChartOptionsBase> & {
-  // type?: "stacked";
   readonly data: number[][];
-	/**
-	 * Defaults to `[]` which is a chart with no labels
-	 */
+  /**
+   * Defaults to `[]` which is a chart with no labels
+   */
   readonly labels?: BarChartLabels;
 };
 
 export type BarChartOptions = BarChartNumericalOpts | BarChartStackedOpts;
 
-// There's probably a better way than type predicates but going to go with this for now instead of getting hung up on type narrowing/inference/asserting.
+// Currently mostly unused, to be deleted
 export const isNumericalArray = (
   arr: number[] | number[][]
 ): arr is number[] => {
@@ -133,8 +133,3 @@ export const isStackedOptions = (
 ): opts is BarChartStackedOpts => {
   return 'type' in opts && opts.type === 'stacked';
 };
-
-// type BarChartOptions = Optional<BarChartOptionsBase> & {
-// 	readonly data: BarChartData;
-// 	readonly labels: BarChartLabels;
-// };

@@ -1,0 +1,141 @@
+---
+title: Barchart Stacked Examples
+description: The first chart type
+---
+
+# `barchartStacked`
+
+Time for some stacking!
+
+Fully in-chart labelling yet to be fully settled on.
+
+## Basic Examples
+
+Simple usage for simple results
+
+### Minimal Example
+
+```ts
+const myStackedChart = barchartStacked({
+  data: [
+    [50, 100, 30],
+    [10, 10, 10],
+    [100, 150, 50],
+  ],
+});
+
+document.body.appendChild(myStackedChart);
+```
+
+![A stacked bar chart containing three bars: the first bar has segments of 50, 100, and 30; the second has three segments of 10; and the third bar has segments of 100, 150, and 50.](/imgs/examples/barchartstacked/ex_tbcs0.svg)
+
+### Imbalanced Datasets
+
+The data sets don't need to match up in size, here the middle bar only has one datapoint:
+
+```ts
+barchartStacked({
+  data: [[50, 100, 30], [100], [100, 150, 50]],
+});
+```
+
+![A stacked bar chart containing three bars: the first bar has segments of 50, 100, and 30; the second bar has only one segment of 100; and the third bar has segments of 100, 150, and 50.](/imgs/examples/barchartstacked/ex_tbcs1_different_groupsizes.svg)
+
+### With Labels
+
+```ts
+barchartStacked({
+  data: [
+    [50, 100, 30],
+    [100, 15, 30],
+    [100, 50, 50],
+  ],
+  labels: ['foo', 'bar', 'baz'],
+});
+```
+
+![A stacked bar chart containing three bars: the first bar has segments of 50, 100, and 30; the second has segments of 100, 15, and 30; and the third bar has segments of 100, 50, and 50. Additionally this stacked bar chart is labelled, the first bar is labelled "foo", the second "bar", and the third "baz."](/imgs/examples/barchartstacked/ex_tbcs2_withlabels.svg)
+
+## Coloring
+
+Coloring stacked barcharts is just as simple as normal barcharts.
+
+### Alternating Colors
+
+Colors are used in a continuos manner (1-2-3-1-2-3 etc) so you can provide as few or as many colors as you'd like.
+
+```ts
+barchartStacked({
+  data: [
+    [50, 100, 30],
+    [100, 15, 30],
+    [100, 50, 50],
+  ], //     cyan      magenta     red
+  colors: ['#ff00ff', '#00ffff', '#dd0547'],
+});
+```
+
+![A stacked bar chart containing three bars: the first bar has segments of 50, 100, and 30; the second has segments of 100, 15, and 30; and the third bar has segments of 100, 50, and 50. Additionally each segment of the stacked bar chart is colored, in a repeating alternating sequence of red, cyan, and magenta.](/imgs/examples/barchartstacked/ex_tbcs3_withcolors.svg)
+
+### Gradients
+
+Gradients also work the same:
+
+```ts
+barchartStacked({
+  data: [
+    [50, 100, 130],
+    [100, 100, 50],
+    [100, 50, 100],
+  ],
+  gradientColors: ['#ff00ff', '#00ffff', '#dd0547'],
+  gradientDirection: 'top-to-bottom',
+});
+```
+
+![A stacked bar chart containing three bars: the first bar has segments of 50, 100, and 30; the second has segments of 100, 15, and 30; and the third bar has segments of 100, 50, and 50. Additionally each segment of the stacked bar chart is colored, with each getting a linear gradient of magenta, cyan, and red.](/imgs/examples/barchartstacked/ex_tbcs4_gradient.svg)
+
+Though you'll want to be mindful of the gradient's <u className="text-purple-500 font-bold">gradientDirection</u> parameter as all segments receive the same gradient, so if it's going in the same direction as the bars longer side it will look like one continuous bar instead of segmented:
+
+![A stacked bar chart containing three bars: the first bar has segments of 50, 100, and 30; the second has segments of 100, 15, and 30; and the third bar has segments of 100, 50, and 50. Additionally each segment of the stacked bar chart is colored, with each getting a linear gradient of magenta, cyan, and red. Though in this case the gradient is making each bar indistinguishable from the others.](/imgs/examples/barchartstacked/ex_tbcs4_gradient_bad.svg)
+
+Continuous gradients also work, though this makes it almost impossible to tell the segments apart. Though <u>this can be mitigated with CSS!</u>
+
+![A stacked bar chart containing three bars: the first bar has segments of 50, 100, and 30; the second has segments of 100, 15, and 30; and the third bar has segments of 100, 50, and 50. Additionally each segment of the stacked bar chart is colored via a continuos linear gradient that spans the entirety of the containing element, making the top segments magenta & bottom segments red.](/imgs/examples/barchartstacked/ex_tbcs5_continuousgradient.svg)
+
+```ts tab="ts"
+barchartStacked({
+  data: [
+    [50, 100, 130],
+    [100, 100, 50],
+    [100, 50, 100],
+  ],
+  gradientColors: ['#ff00ff', '#00ffff', '#dd0547'],
+  gradientDirection: 'top-to-bottom',
+  gradientMode: 'continuous',
+  barClass: 'mybars',
+});
+```
+
+```css tab="css"
+.mybars {
+  stroke: white;
+  stroke-width: 3px;
+}
+```
+
+![A stacked bar chart containing three bars: the first bar has segments of 50, 100, and 30; the second has segments of 100, 15, and 30; and the third bar has segments of 100, 50, and 50. Additionally each segment of the stacked bar chart is colored via a continuos linear gradient that spans the entirety of the containing element, making the top segments magenta & bottom segments red, and due to the CSS each segment has a white outline](/imgs/examples/barchartstacked/ex_tbcs5_continuousgradient_stroke.svg)
+
+Of course that's not the only way of using CSS to differentiate the segments:
+
+```css tab="css"
+.mybars:nth-child(even) {
+  opacity: 0.5;
+}
+```
+
+![A stacked bar chart containing three bars: the first bar has segments of 50, 100, and 30; the second has segments of 100, 15, and 30; and the third bar has segments of 100, 50, and 50. Additionally each segment of the stacked bar chart is colored via a continuos linear gradient that spans the entirety of the containing element, making the top segments magenta & bottom segments red, and due to the CSS every other segment is darker](/imgs/examples/barchartstacked/ex_tbcs5_continuous_opacity.png)
+
+## Animation
+
+To be filled in, though the idea would be the same as barcharts - except you'd need to stagger the animation & delay it so that they play in sequence per-segment. Unless you want each bar appearing at once then it's identical.
