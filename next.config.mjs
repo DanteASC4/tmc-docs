@@ -9,6 +9,7 @@ const config = {
   images: { unoptimized: true },
   basePath: '/toomanycharts',
   assetPrefix: '/toomanycharts/',
+  serverExternalPackages: ['typescript', 'twoslash']
 };
 
 export default withMDX(config);

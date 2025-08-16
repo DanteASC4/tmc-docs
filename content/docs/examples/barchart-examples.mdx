@@ -164,20 +164,9 @@ Because toomanycharts outputs SVG elements, they can be animated! The <u classNa
 
 ### Animejs
 
-Let's look at an example, where to have the bars 'grow in' we'll need to do exactly that. I'll use my animation engine lib of choice - [animejs](https://animejs.com/documentation/getting-started)!
-
-```ts tab="main.ts" lineNumbers
-// main.ts
-import BasicChart from './script';
-import './style.css';
-
-const app = document.querySelector<HTMLDivElement>('#app')!;
-const addMyChart = BasicChart();
-app.appendChild(addMyChart);
-```
+Let's look at an example, where to have the bars 'grow in' we'll need to do exactly that. I'll use my animation engine lib of choice - <Link to="https://animejs.com/documentation/getting-started"> animejs </Link>!
 
 ```ts tab="script.ts" lineNumbers
-// script.ts
 import { animate, utils } from 'animejs';
 import { barchart } from 'toomanycharts';
 
@@ -208,12 +197,22 @@ export default function BasicChart() {
 }
 ```
 
+```ts tab="main.ts" lineNumbers
+// main.ts
+import BasicChart from './script';
+import './style.css';
+
+const app = document.querySelector<HTMLDivElement>('#app')!;
+const addMyChart = BasicChart();
+app.appendChild(addMyChart);
+```
+
 Results in:
 
 <iframe
   height="400"
   width="400"
-  src="/example-pages/barchart-animejs/index.html"></iframe>
+  src="/toomanycharts/example-pages/barchart-animejs/index.html"></iframe>
 
 #### Breakdown
 

@@ -1,0 +1,265 @@
+---
+title: Linechart Examples
+description: Up down & all around
+---
+
+# `linechart`
+
+Loads of examples!
+
+<Callout title="WIP" type="warn">
+So currently the `lineType`'s `"smooth"` option doesn't behave quite as expected when datapoints are very far from eachother. Apparently I've misunderstood the math behind cubic bezier curves control point reflection. Fix coming soon!
+</Callout>
+
+
+
+## Basic Examples
+
+Simple usage for some simple line charts.
+
+### Basic As It Gets
+
+```ts
+const myLineChart = linechart({
+  data: [50, 100, 30],
+});
+
+document.body.appendChild(myLineChart);
+```
+
+![A basic line chart](/imgs/examples/linechart/ex1.svg)
+
+### More Data
+
+```ts
+linechart({
+  data: [10, 20, 10, 20, 10, 20, 50, 100],
+});
+```
+
+![](/imgs/examples/linechart/ex2.svg)
+
+### Full-Width Line
+
+While not obvious here, lines by default will not reach the bounds of their container, this behavior can be changed with the `fullWidthLine` option.
+
+```ts
+linechart({
+  data: [10, 20, 10, 20, 10, 20, 50, 100],
+  fullWidthLine: true, // [!code ++]
+});
+```
+
+![](/imgs/examples/linechart/ex3.svg)
+
+## Styling
+
+Line charts have a few different styling parameters available.
+
+### Basic Coloring
+
+The `colors` parameter allows for coloring lines, a single string or array of color strings are accepted.
+
+```ts
+linechart({
+  data: [50, 100, 30],
+  colors: 'red', // [!code ++]
+});
+```
+
+![](/imgs/examples/linechart/ex4.svg)
+
+### Thicker Line
+
+The line's thickness is also adjustable!
+
+```ts
+linechart({
+  data: [50, 100, 30],
+  colors: 'red',
+  thickness: 10, // [!code ++]
+});
+```
+
+![](/imgs/examples/linechart/ex5.svg)
+
+### Smooth Line
+
+Making the line smooth is also simple, just set `lineType` to `"smooth"`! For now though the smoothness amount isn't tweakable, but it will be.
+
+```ts
+linechart({
+  data: [50, 100, 30],
+  colors: 'red',
+  thickness: 10,
+  lineType: 'smooth', // [!code ++]
+});
+```
+
+![](/imgs/examples/linechart/ex6.svg)
+
+### Gradients
+
+Gradients, get your gradients!
+
+```ts
+linechart({
+  data: [50, 100, 30],
+  thickness: 10,
+  lineType: 'smooth',
+  gradientColors: ['#ff00ff', '#00ffff'], // [!code ++]
+});
+```
+
+![](/imgs/examples/linechart/ex7.svg)
+
+Let's have the gradient go from top to bottom instead.
+
+```ts
+linechart({
+  data: [50, 100, 30],
+  thickness: 10,
+  lineType: 'smooth',
+  gradientColors: ['#ff00ff', '#00ffff'],
+  gradientDirection: 'top-to-bottom', // [!code ++]
+});
+```
+
+![](/imgs/examples/linechart/ex8.svg)
+
+## Extras
+
+There's a few more things you can do with `linechart`!
+
+### Multiple Lines
+
+You can also have <span className="text-purple-500 italic">multiple</span> lines! Instead of passing a single array of numbers, you can pass an array of numerical arrays, and each will become it's own line!
+
+```ts
+linechart({
+  data: [
+    [50, 100, 30], // Line 1 [!code ++]
+    [3, 15, 110], // Line 2 [!code ++]
+  ],
+  thickness: 3,
+  gradientColors: ['#ff00ff', '#00ffff'],
+  gradientDirection: 'top-to-bottom',
+});
+```
+
+![](/imgs/examples/linechart/ex9.svg)
+
+You can also pass various options as an array as well, which will target the corresponding line!
+Check out the `linechart` <Link to="/toomanycharts/docs/charts-api/linechart">API page</Link> for supported options, anything that has a type of `T | T[]` (as in, the type, or an array of that type) can be used in this way.
+
+```ts
+linechart({
+  data: [
+    [50, 100, 30], // Line 1
+    [3, 15, 110], // Line 2
+  ],
+  thickness: [3, 10], // [!code highlight]
+  gradientColors: ['#ff00ff', '#00ffff'],
+  gradientDirection: 'top-to-bottom',
+});
+```
+
+![](/imgs/examples/linechart/ex10.svg)
+
+## Animation
+
+Paths are capable of some really cool animations!
+
+### Animejs
+
+Once again using my animation tool of choice, <Link to="https://animejs.com/documentation/svg/createdrawable">animejs</Link>! Here's a full example.
+
+```ts tab="script.ts" lineNumbers
+import { animate, svg } from 'animejs';
+import { linechart } from 'toomanycharts';
+
+const drawLine = () => {
+  animate(svg.createDrawable('.da-line'), {
+    draw: ['0 0', '0 1', '1 1'],
+    ease: 'inOutCubic',
+    duration: 2000,
+    loop: true,
+  });
+};
+
+export default function myLineChart() {
+  const basic = linechart({
+    data: [10, 20, 10, 20, 10, 20, 50, 100],
+    thickness: 10,
+    gradientColors: ['#ff00ff', '#00ffff'],
+    gradientDirection: 'top-to-bottom',
+    lineClass: 'da-line',
+  });
+
+  setTimeout(() => {
+    drawLine();
+  }, 100);
+
+  return basic;
+}
+```
+
+```ts tab="main.ts" lineNumbers
+import myLineChart from './script';
+import './style.css';
+
+const app = document.querySelector<HTMLDivElement>('#app')!;
+
+app.appendChild(myLineChart());
+```
+
+Results in:
+
+<iframe
+  height="400"
+  width="400"
+  src="/toomanycharts/example-pages/linechart-animejs-ex1/index.html"></iframe>
+
+While making the above example I got an idea! I bet with a couple tweaks this could be used to make a cool little visual, data aside!
+
+<iframe
+  height="400"
+  width="500"
+  src="/toomanycharts/example-pages/linechart-animejs-ex2/index.html"></iframe>
+
+And the code:
+
+```ts lineNumbers
+import { animate, stagger, svg } from 'animejs';
+import { linechart } from 'toomanycharts';
+
+const drawLine = () => {
+  animate(svg.createDrawable('.da-line'), {
+    draw: ['0 0', '0 1', '1 1'],
+    ease: 'linear', // [!code highlight]
+    duration: 1000, // faster! [!code highlight]
+    delay: stagger(1000), // A staggered delay, so the targets are affected one after another instead of all at once [!code highlight]
+    loop: true,
+  });
+};
+
+export default function myLineChart() {
+  const basic = linechart({
+    data: [
+      [10, 20, 10, 20, 10, 20, 50, 90], // Two lines, that are basically opposites [!code highlight]
+      [90, 80, 90, 80, 90, 80, 50, 10],//  [!code highlight]
+    ],
+    fullWidthLine: true, // reach the end of the parent SVG [!code highlight]
+    thickness: 10,
+    gradientColors: ['#ff00ff', '#00ffff'],
+    lineClass: 'da-line',
+    width: 500,
+  });
+
+  setTimeout(() => {
+    drawLine();
+  }, 100);
+
+  return basic;
+}
+```

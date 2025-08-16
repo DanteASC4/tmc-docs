@@ -11,7 +11,19 @@ export type Prettify<T> = {
   [K in keyof T]: T[K];
 } & {};
 
+type MakeRange<
+  N extends number,
+  Result extends Array<unknown> = []
+> = Result['length'] extends N
+  ? Result
+  : MakeRange<N, [...Result, Result['length']]>;
+
+type MaxP = MakeRange<101>;
+
+type Percentage = `${MaxP[number]}%`;
+
 export type ChartOptions = {
+  // min: number;
   /**
    * Defaults to `300`
    */
@@ -22,6 +34,8 @@ export type ChartOptions = {
   width: number;
 };
 
+export type GradientColor = string | `${string}:${Percentage}`;
+
 export type LinearGradientDirection =
   | 'left-to-right'
   | 'right-to-left'
@@ -31,12 +45,52 @@ export type LinearGradientDirection =
 
 export type LinearGradientType = 'individual' | 'continuous';
 
+export type LinearGradientOptions = {
+  /**
+   * Array of CSS color values
+   */
+  gradientColors: GradientColor[];
+  /**
+   * Defaults to `"individual"` when `gradientColors` is supplied but no `gradientMode` is given.
+   */
+  gradientMode: LinearGradientType;
+  /**
+   * Defaults to `"left-to-right"` when `gradientColors` is supplied but no `gradientDirection` is given.
+   */
+  gradientDirection: LinearGradientDirection;
+};
+
+// TODO use this to allow multiple gradients
+export type ManyLinearGradientOptions = {
+  gradientColors: GradientColor[][];
+  gradientMode: Extract<LinearGradientType, 'individual'>;
+  gradientDirection: LinearGradientDirection;
+};
+
 export type BarChartClasses = {
+  /**
+   * Name is ambiguous, but attached to parent group of both label & bar groups
+   */
   groupClass: string;
+  /**
+   * Attached to the parent `SVG` element
+   */
   parentClass: string;
+  /**
+   * Attached to each individual bar `<rect ... />` element
+   */
   barClass: string;
+  /**
+   * Attached to each individual label `<text ... />` element
+   */
   labelClass: string;
+  /**
+   * Attached to the parent `g` element which contains the bar elements
+   */
   barGroupClass: string;
+  /**
+   * Attached to the parent `g` element which contains the label elements
+   */
   labelGroupClass: string;
 };
 
@@ -77,29 +131,18 @@ export type BarChartOptionsBase = {
    * Defaults to `#ffffff`
    */
   labelColors: string[];
-  /**
-   * !?
-   */
-  gradientColors: string[];
-  /**
-   * Defaults to `"individual"` when `gradientColors` is supplied but no `gradientMode` is given.
-   */
-  gradientMode: LinearGradientType;
-  /**
-   * Defaults to `"left-to-right"` when `gradientColors` is supplied but no `gradientDirection` is given.
-   */
-  gradientDirection: LinearGradientDirection;
 } & BarChartClasses &
+  LinearGradientOptions &
   ChartOptions;
 
-export type BarChartLabels = string[];
+export type Labels = string[];
 
 export type BarChartNumericalOpts = Optional<BarChartOptionsBase> & {
   readonly data: number[];
   /**
    * Defaults to `[]` which is a chart with no labels
    */
-  readonly labels?: BarChartLabels;
+  readonly labels?: string[];
 };
 
 export type BarChartStackedOpts = Optional<BarChartOptionsBase> & {
@@ -107,12 +150,95 @@ export type BarChartStackedOpts = Optional<BarChartOptionsBase> & {
   /**
    * Defaults to `[]` which is a chart with no labels
    */
-  readonly labels?: BarChartLabels;
+  readonly labels?: string[];
 };
 
 export type BarChartOptions = BarChartNumericalOpts | BarChartStackedOpts;
 
-// Currently mostly unused, to be deleted
+export type LineChartClasses = {
+  /**
+   * Added to resulting `<path>` elements
+   */
+  lineClass: string;
+  /**
+   * Added to resulting `<g>` tag containing line `<path>` elements
+   */
+  lineGroupClass: string;
+  /**
+   * Added to resulting parent `<svg>` element
+   */
+  parentClass: string;
+  /**
+   * Added to resulting `<text>` elements
+   */
+  labelClass: string;
+  /**
+   * Added to resulting `<g>` tag containing line `<text>` elements
+   */
+  labelGroupClass: string;
+};
+
+/**
+ * Used for resulting path's [`stroke-linecap`](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/stroke-linecap) attribute
+ */
+type LineCaps = 'round' | 'butt' | 'square';
+/**
+ * Controls whether resulting lines are drawn straight or smooth
+ */
+type LineTypes = 'straight' | 'smooth';
+
+export type LineChartOptionsBase = {
+  /**
+   * When not supplied, defaults to `10` greater than the largest datapoint in the supplied `data` array.
+   */
+  max: number;
+  /**
+   * Used for resulting path's `stroke-width`
+   */
+  thickness: number | number[];
+  /**
+   * Used for resulting path's [`stroke-linecap`](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/stroke-linecap) attribute
+   */
+  cap: LineCaps | LineCaps[];
+  /**
+   * Controls whether resulting lines are drawn straight or smooth
+   * Defaults to `"straight"`
+   */
+  lineType: LineTypes | LineTypes[];
+  /**
+   * Decides whether the drawn line reaches the end of it's containing SVG box,
+   * Defaults to false
+   */
+  fullWidthLine: boolean;
+};
+
+export type LineChartColors = {
+  /**
+   * Used for the resulting path's `stroke` attribute, effectively coloring the line
+   * Defaults to `#ffffff`
+   * Will alternate between colors if there are less colors than the number of drawn lines.
+   */
+  colors: string | string[];
+  /**
+   * Used for the resulting label text color
+   * Defaults to `#ffffff`
+   * Will alternate between colors if there are less colors than labels.
+   */
+  labelColors: string | string[];
+};
+
+export type LineChartOptions = Optional<
+  LineChartOptionsBase &
+    LineChartColors &
+    ChartOptions &
+    LinearGradientOptions &
+    LineChartClasses
+> & {
+  readonly data: number[][] | number[];
+  readonly labels?: string[][] | string[];
+};
+
+// Currently unused, to be deleted
 export const isNumericalArray = (
   arr: number[] | number[][]
 ): arr is number[] => {
