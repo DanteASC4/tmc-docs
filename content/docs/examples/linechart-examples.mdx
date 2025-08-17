@@ -7,12 +7,6 @@ description: Up down & all around
 
 Loads of examples!
 
-<Callout title="WIP" type="warn">
-So currently the `lineType`'s `"smooth"` option doesn't behave quite as expected when datapoints are very far from eachother. Apparently I've misunderstood the math behind cubic bezier curves control point reflection. Fix coming soon!
-</Callout>
-
-
-
 ## Basic Examples
 
 Simple usage for some simple line charts.
@@ -247,7 +241,7 @@ export default function myLineChart() {
   const basic = linechart({
     data: [
       [10, 20, 10, 20, 10, 20, 50, 90], // Two lines, that are basically opposites [!code highlight]
-      [90, 80, 90, 80, 90, 80, 50, 10],//  [!code highlight]
+      [90, 80, 90, 80, 90, 80, 50, 10], //  [!code highlight]
     ],
     fullWidthLine: true, // reach the end of the parent SVG [!code highlight]
     thickness: 10,
