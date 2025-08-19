@@ -23,15 +23,39 @@ type MaxP = MakeRange<101>;
 type Percentage = `${MaxP[number]}%`;
 
 export type ChartOptions = {
-  // min: number;
   /**
-   * Defaults to `300`
+   * Controls the resulting SVG `width` attribute.
+   *
+   * Used in some calculations. Leave blank if you get unexpected results.
+   *
+   * Instead use CSS to change the SVG width to any value with no issues!
+   */
+  width: number;
+  /**
+   * Controls the resulting SVG `height` attribute.
+   *
+   * Used in some calculations. Leave blank if you get unexpected results.
+   *
+   * Instead use CSS to change the SVG height to any value with no issues!
    */
   height: number;
   /**
-   * Defaults to `300`
+   * Controls the "viewBox" width of resulting SVG
+   *
+   * Defaults to width if unset.
+   *
+   * **WARN** Can lead to unexpected results, docs demo usage page is TODO!
    */
-  width: number;
+  vWidth: number;
+  /**
+   *
+   * Controls the "viewBox" height of resulting SVG
+   *
+   * Defaults to height if unset.
+   *
+   * **WARN** Can lead to unexpected results, docs demo usage page is TODO!
+   */
+  vHeight: number;
 };
 
 export type GradientColor = string | `${string}:${Percentage}`;
@@ -112,7 +136,11 @@ export type BarChartOptionsBase = {
    */
   barWidth: number;
   /**
-   * When not supplied, defaults to `10` greater than the largest datapoint in the supplied `data` array.
+   * When not supplied, defaults to largest datapoint in the supplied `data` array.
+   *
+   * Will override the SVG `viewBox` height if supplied.
+   *
+   * **WARN** Can lead to unexpected results, docs demo usage page is TODO!
    */
   max: number;
   /**
@@ -134,8 +162,6 @@ export type BarChartOptionsBase = {
 } & BarChartClasses &
   LinearGradientOptions &
   ChartOptions;
-
-export type Labels = string[];
 
 export type BarChartNumericalOpts = Optional<BarChartOptionsBase> & {
   readonly data: number[];
@@ -189,7 +215,17 @@ type LineTypes = 'straight' | 'smooth';
 
 export type LineChartOptionsBase = {
   /**
-   * When not supplied, defaults to `10` greater than the largest datapoint in the supplied `data` array.
+   * When not supplied defaults to `0` or a negative value if present in given data.
+   *
+   * **WARN** Can lead to unexpected results, leave unset if results are undesirable!
+   */
+  min: number;
+  /**
+   * When not supplied, defaults to largest datapoint in the supplied `data` array.
+   *
+   * Will override the SVG `viewBox` height if supplied.
+   *
+   * **WARN** Can lead to unexpected results, leave unset if results are undesirable!
    */
   max: number;
   /**
@@ -236,26 +272,4 @@ export type LineChartOptions = Optional<
 > & {
   readonly data: number[][] | number[];
   readonly labels?: string[][] | string[];
-};
-
-// Currently unused, to be deleted
-export const isNumericalArray = (
-  arr: number[] | number[][]
-): arr is number[] => {
-  return typeof arr[0] === 'number';
-};
-export const is2DNumericalArray = (
-  arr: number[] | number[][]
-): arr is number[][] => {
-  return Array.isArray(arr[0]);
-};
-export const isNumericalOptions = (
-  opts: BarChartOptions
-): opts is BarChartNumericalOpts => {
-  return 'type' in opts && opts.type === 'numerical';
-};
-export const isStackedOptions = (
-  opts: BarChartOptions
-): opts is BarChartStackedOpts => {
-  return 'type' in opts && opts.type === 'stacked';
 };

@@ -3,6 +3,23 @@ title: changelog
 description: What's new?
 ---
 
+# 0.1.9
+
+<span className="text-info-400 font-bold">Fix</span>
+
+- Fixed issue with linear gradients being incorrectly set for `barchart`
+- Fixed an issue where `max` for barcharts was not being properly allowed
+
+<span className="text-green-400 font-bold">New</span>
+
+- Few new parameters that are on the more advanced in usage
+  - `all`
+    - `vWidth` tied to resulting `viewBox` width
+    - `vHeight` tied to resulting `viewBox` height
+  - `linechart`
+    - `min` allows for the `min-y` of `viewBox`
+- `linechart` can now properly handle negative values
+
 # 0.1.8
 
 <span className="text-info-400 font-bold">Fix</span>
@@ -16,7 +33,6 @@ description: What's new?
 - Fixed `lineType: "smooth"`
   - All lines now perfectly smooth, regardless of the amount of datapoints!
 - Fixed issue with incorrect automatic y-values for linecharts
-
 
 # 0.1.6
 
