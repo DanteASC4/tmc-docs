@@ -56,6 +56,116 @@ declare global {
     vHeight: number;
   };
 
+  export type ImageLabel = {
+    /**
+     * image source, absolute or relative
+     */
+    href: string;
+    /**
+     * image alt text
+     */
+    alt: string;
+    /**
+     * text placed above the image
+     */
+    topText?: string;
+    /**
+     * text placed below the image
+     */
+    bottomText?: string;
+    /**
+     * If set used for the image element's height
+     */
+    height?: number;
+    /**
+     * If set used for the image element's width
+     */
+    width?: number;
+  };
+
+  export type Labels = {
+    /**
+     * Defaults to `#ffffff`
+     * Will alternate between colors if there are less colors than the number of drawn labels.
+     */
+    labelColors: string[];
+    /**
+     * An array of strings attached to various datasets of charts. See chart's themselves for specifics.
+     */
+    labels: string[];
+    /**
+     * "literal" makes data labels display the given number in-place
+     * "percentage" makes data labels display their value as a percentage of the sum of all values in the `data` array
+     */
+    dataLabels: 'literal' | 'percentage';
+    /**
+     * An alternative label format, allowing images, alt text, top text, and bottom text.
+     *
+     * Takes precedence over `labels` if supplied.
+     *
+     * @see {@link ImageLabel}
+     */
+    imageLabels: ImageLabel[];
+
+    /**
+     * Attached to each individual label `<text>` element
+     */
+    labelClass: string;
+    /**
+     * Attached to each individual data label `<text>` element
+     */
+    dataLabelClass: string;
+    /**
+     * Attached to each individual `<img>` element
+     */
+    imageLabelClass: string;
+    /**
+     * Attached to each individual top & bottom `<text>` element (if topText or bottomText supplied)
+     */
+    imageLabelTextClass: string;
+
+    /**
+     * Attached to the `<g>` element which contains the label `<text>` elements
+     */
+    labelGroupClass: string;
+    /**
+     * Attached to the `<g>` element which contains the created data label `<text>` elements
+     */
+    dataLabelGroupClass: string;
+    /**
+     * Attached to the `<g>` element which contains the created image label `<g>` elements. While other label types are just `<text>` elements and don't need sub-grouping, image labels can consist of additional elements if `topText` or `bottomText` was supplied.
+     *
+     * If there is top/bottom text:
+     *
+     * ```html
+     * <g class="imageLabelContainerClass">
+     *  <g class="imageLabelSubGroupClass">
+     *    <text>top</text>
+     *    <img src alt />
+     *    <text>bottom</bottom>
+     *  </g>
+     *  ...
+     * <g>
+     * ```
+     *
+     * If there's no bottom or top text, there will be no sub-grouping:
+     *
+     * ```html
+     * <g class="imageLabelContainerClass">
+     *    <img src alt />
+     *  ...
+     * <g>
+     * ```
+     */
+    imageLabelContainerClass: string;
+    /**
+     * Attached to the `<g>` element which contains the created image label elements `<img>`. If top/bottom text was supplied, this is attached to the sub-groups if sub-grouping is performed.
+     *
+     * @see {@link imageLabelContainerClass} for a more detailed breakdown
+     */
+    imageLabelSubGroupClass: string;
+  };
+
   export type GradientColor = string | `${string}:${Percentage}`;
 
   export type LinearGradientDirection =
@@ -103,17 +213,9 @@ declare global {
      */
     barClass: string;
     /**
-     * Attached to each individual label `<text ... />` element
-     */
-    labelClass: string;
-    /**
-     * Attached to the parent `g` element which contains the bar elements
+     * Attached to the parent `<g>` element which contains the bar elements
      */
     barGroupClass: string;
-    /**
-     * Attached to the parent `g` element which contains the label elements
-     */
-    labelGroupClass: string;
   };
 
   export type BarChartOptionsBase = {
@@ -153,28 +255,23 @@ declare global {
      * Defaults to `#ffffff`
      */
     colors: string[];
-    /**
-     * Defaults to `#ffffff`
-     */
-    labelColors: string[];
   } & BarChartClasses &
     LinearGradientOptions &
+    Labels &
     ChartOptions;
 
   export type BarChartNumericalOpts = Optional<BarChartOptionsBase> & {
-    readonly data: number[];
     /**
-     * Defaults to `[]` which is a chart with no labels
+     * A single array of numbers, each number representing a bar.
      */
-    readonly labels?: string[];
+    readonly data: number[];
   };
 
   export type BarChartStackedOpts = Optional<BarChartOptionsBase> & {
-    readonly data: number[][];
     /**
-     * Defaults to `[]` which is a chart with no labels
+     * A 2D array of numbers, each sub-array representing a stack of bars.
      */
-    readonly labels?: string[];
+    readonly data: number[][];
   };
 
   export type BarChartOptions = BarChartNumericalOpts | BarChartStackedOpts;
@@ -244,34 +341,26 @@ declare global {
      * Defaults to false
      */
     fullWidthLine: boolean;
-  };
-
-  export type LineChartColors = {
     /**
      * Used for the resulting path's `stroke` attribute, effectively coloring the line
      * Defaults to `#ffffff`
      * Will alternate between colors if there are less colors than the number of drawn lines.
      */
     colors: string | string[];
-    /**
-     * Used for the resulting label text color
-     * Defaults to `#ffffff`
-     * Will alternate between colors if there are less colors than labels.
-     */
-    labelColors: string | string[];
   };
 
   export type LineChartOptions = Optional<
     LineChartOptionsBase &
-      LineChartColors &
       ChartOptions &
       LinearGradientOptions &
-      LineChartClasses
+      LineChartClasses &
+      Labels
   > & {
     readonly data: number[][] | number[];
     readonly labels?: string[][] | string[];
   };
 
+  function barchart(options: BarChartOptions): void;
   function linechart(options: LineChartOptions): void;
 }
 

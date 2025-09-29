@@ -1,0 +1,245 @@
+---
+title: Labels Examples
+description: Labels here labels there, labels everywhere.
+---
+
+# Labels
+
+Labels can add a lot to a chart, and as such there are a few options to customize them.
+
+## Basic Labels
+
+The simplest label type is just plaintext, supplied as an array to the `labels` option. This is seen in each chart example page.
+
+```ts
+barchart({
+  data: [50, 100, 30],
+  labels: ['1st', '2nd', '3rd'], // [!code highlight]
+});
+```
+
+![A basic barchart with labels](/imgs/examples/labels/ex1.svg)
+
+The same works for line charts:
+
+```ts
+linechart({
+  data: [
+    [50, 100, 40],
+    [10, 20, 5],
+    [90, 80, 70],
+  ],
+  labels: ['1st', '2nd', '3rd'], // [!code highlight]
+});
+```
+
+![A basic linechart with labels](/imgs/examples/labels/ex2.svg)
+
+And barchartStacked:
+
+```ts
+barchartStacked({
+  data: [
+    [50, 100, 30],
+    [20, 40, 10],
+    [10, 20, 5],
+  ],
+  labels: ['1st', '2nd', '3rd'], // [!code highlight]
+});
+```
+
+![A basic stacked barchart with labels](/imgs/examples/labels/ex3.svg)
+
+## Label Styling
+
+Labels can be styled with the `labelClass` option, which accepts a string that will be added to each resulting `<text>` element.
+
+And with that you can use CSS to add any styling you want!
+
+<Callout type="info">
+Note that these are SVG elements, so CSS properties that don't apply to SVG elements won't work here!
+
+For example, `color` won't work, but `fill` will. Here's a helpful resource on [CSS & SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorials/SVG_from_scratch/SVG_and_CSS)
+
+</Callout>
+
+```ts tab="TS"
+barchart({
+  data: [50, 100, 30],
+  labels: ['1st', '2nd', '3rd'],
+  labelClass: 'my-bar-labels', // [!code ++]
+});
+```
+
+```css tab="CSS"
+.my-bar-labels {
+  fill: red;
+}
+```
+
+![A barchart with red labels](/imgs/examples/labels/ex4.svg)
+
+## Data Labels
+
+But what if you just want datalabels? No problem! There's two options for this:
+
+- `dataLabels: 'literal' // or 'percentage'` - This will use the data values as labels placed on each bar/point
+- or you can pass an array of the numbers you want as labels to `labels`
+
+```ts
+barchart({
+  data: [50, 100, 30],
+  dataLabels: 'literal', // [!code highlight]
+});
+```
+
+![A barchart with datalabels showing the literal values of each bar](/imgs/examples/labels/ex5.svg)
+
+The "percentage" option will calculate the percentage of each bar relative to the total of all bars, and display that instead:
+
+```ts
+barchart({
+  data: [50, 100, 30],
+  dataLabels: 'percentage', // [!code highlight]
+});
+```
+
+![A barchart with datalabels showing the percentage value of each bar](/imgs/examples/labels/ex6.svg)
+
+You can also use datalabels along with normal labels:
+
+```ts
+barchart({
+  data: [50, 100, 30],
+  dataLabels: 'percentage',
+  labels: ['A', 'B', 'C'], // [!code highlight]
+});
+```
+
+![A barchart with both normal labels and percentage datalabels](/imgs/examples/labels/ex7.svg)
+
+## Image Labels
+
+Image labels are also supported! To use them, you can pass an array of objects to the `imageLabels` argument, which accepts the following properties:
+
+```ts
+type ImageLabel = {
+  href: string;
+  alt: string;
+  topText?: string;
+  bottomText?: string;
+  height?: number;
+  width?: number;
+};
+```
+
+Let's see an example:
+
+```ts
+barchart({
+  data: [50, 100, 30],
+  imageLabels: [
+    {
+      href: '/imgs/misc/test.jpg',
+      alt: 'Skull',
+      height: 25,
+      width: 25,
+    },
+    {
+      href: '/imgs/misc/test.jpg',
+      alt: 'Skull',
+      height: 25,
+      width: 25,
+    },
+    {
+      href: '/imgs/misc/test.jpg',
+      alt: 'Skull',
+      height: 25,
+      width: 25,
+    },
+  ],
+});
+```
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 300 300"
+  height="300"
+  width="300">
+  <g class="tmc-bargroup">
+    <rect height="50" width="50" y="250" x="25" fill="#ffffff"></rect>
+    <rect height="100" width="50" y="200" x="125" fill="#ffffff"></rect>
+    <rect height="30" width="50" y="270" x="225" fill="#ffffff"></rect>
+  </g>
+  <g class="tmc-image-label-group">
+    <image
+      className="tmc-image-label"
+      y="207.5"
+      x="37.5"
+      height="25"
+      width="25"
+      alt="Skull"
+      href="/toomanycharts/imgs/misc/test.jpg"></image>
+    <image
+      className="tmc-image-label"
+      y="157.5"
+      x="137.5"
+      height="25"
+      width="25"
+      alt="Skull"
+      href="/toomanycharts/imgs/misc/test.jpg"></image>
+    <image
+      className="tmc-image-label"
+      y="227.5"
+      x="237.5"
+      height="25"
+      width="25"
+      alt="Skull"
+      href="/toomanycharts/imgs/misc/test.jpg"></image>
+  </g>
+</svg>
+
+You can also add text above or below the image with the `topText` and `bottomText` properties:
+
+```ts
+linechart({
+  data: [
+    [50, 50, 50, 40],
+    [80, 20, 10, 105],
+    [220, 240, 260, 280],
+  ],
+  imageLabels: [
+    {
+      href: '/imgs/misc/test.jpg',
+      alt: 'Skull',
+      height: 25,
+      width: 25,
+      topText: 'Top',
+    },
+    {
+      href: '/imgs/misc/test.jpg',
+      alt: 'Skull',
+      height: 25,
+      width: 25,
+      bottomText: 'Bottom',
+    },
+    {
+      href: '/imgs/misc/test.jpg',
+      alt: 'Skull',
+      height: 25,
+      width: 25,
+      topText: 'Top',
+      bottomText: 'Bottom',
+    },
+  ],
+});
+```
+
+![A basic linechart with image labels](/imgs/examples/labels/ex9.png)
+
+## Class & Styling Options
+
+To see available class names for styling check out the various API pages for each chart type:
+- [BarCharts](../charts-api/barchart)
+- [LineCharts](../charts-api/linechart)
+- [Stacked BarCharts](../charts-api/barchartstacked)

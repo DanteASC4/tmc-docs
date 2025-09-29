@@ -1,11 +1,22 @@
 ---
-title: changelog
+title: Changelog
 description: What's new?
 ---
 
+# 0.2.0
+
+<span className="text-green-400 font-bold">New</span>
+
+- Revamped labeling system:
+  - dataLabels: 'literal' or 'percentage' for automatic value / percentage labels on bars
+  - imageLabels: supply images (with optional topText / bottomText) for bar and line charts
+  - Support for combining normal labels, dataLabels, and imageLabels simultaneously
+  - Improved docs with styling guidance (labelClass, image label grouping classes)
+- Website updated
+
 # 0.1.9
 
-<span className="text-info-400 font-bold">Fix</span>
+<span className="text-info-400 font-bold">Fixes</span>
 
 - Fixed issue with linear gradients being incorrectly set for `barchart`
 - Fixed an issue where `max` for barcharts was not being properly allowed
@@ -13,7 +24,7 @@ description: What's new?
 <span className="text-green-400 font-bold">New</span>
 
 - Few new parameters that are on the more advanced in usage
-  - `all`
+  - `all chart types`
     - `vWidth` tied to resulting `viewBox` width
     - `vHeight` tied to resulting `viewBox` height
   - `linechart`
@@ -22,13 +33,13 @@ description: What's new?
 
 # 0.1.8
 
-<span className="text-info-400 font-bold">Fix</span>
+<span className="text-info-400 font-bold">Fixes</span>
 
 - Removed some console logs from `linechart`
 
 # 0.1.7
 
-<span className="text-info-400 font-bold">Fix</span>
+<span className="text-info-400 font-bold">Fixes</span>
 
 - Fixed `lineType: "smooth"`
   - All lines now perfectly smooth, regardless of the amount of datapoints!

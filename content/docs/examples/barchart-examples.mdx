@@ -36,7 +36,7 @@ Adding some labels:
 ```ts
 barchart({
   data: [50, 100, 30],
-  labels: ['1st', '2nd', '3rd'],
+  labels: ['1st', '2nd', '3rd'], // [!code ++]
 });
 ```
 
@@ -48,7 +48,7 @@ And let's place it on the top:
 barchart({
   data: [50, 100, 30],
   labels: ['1st', '2nd', '3rd'],
-  placement: 'top',
+  placement: 'top', // [!code ++]
 });
 ```
 
@@ -60,7 +60,7 @@ If one bar is far larger than the others, the resulting zoomed out to fit the la
 
 ```ts
 barchart({
-  data: [50, 1000, 100],
+  data: [50, 1000, 100], // [!code highlight]
   placement: 'left',
 });
 ```
@@ -84,13 +84,13 @@ Adding colors is straightforward too!
 
 ### Basic Coloring
 
-Below only `2` colors are provided, but `3` datapoints are given.
+Below only `2` colors are provided, but `3` datapoints are given. When there are less colors than datapoints, the colors will alternate for the remaining datapoints.
 
 ```ts
 barchart({
   data: [100, 50, 100],
   placement: 'top',
-  colors: ['#ff00ff', '#00ffff'],
+  colors: ['#ff00ff', '#00ffff'], // [!code ++]
 });
 ```
 
@@ -106,8 +106,8 @@ In the below example I've set the resulting SVG's height & width to be the same 
 barchart({
   data: [100, 100, 100],
   placement: 'left',
-  gradientColors: ['#ff00ff', '#00ffff'],
-  gradientDirection: 'left-to-right',
+  gradientColors: ['#ff00ff', '#00ffff'], // [!code ++]
+  gradientDirection: 'left-to-right', // the default is 'left-to-right'
   width: 110,
   height: 110,
 });
@@ -130,10 +130,10 @@ barchart({
   data: [100, 50, 100],
   placement: 'top',
   gradientColors: [
-    'oklch(0.7017 0.3225 328.36)',
-    'oklch(0.9054 0.15455 194.769)',
+    'oklch(0.7017 0.3225 328.36)', // [!code highlight]
+    'oklch(0.9054 0.15455 194.769)', // [!code highlight]
   ],
-  gradientDirection: 'top-to-bottom',
+  gradientDirection: 'top-to-bottom', // [!code word:'top-to-bottom']
 });
 ```
 
@@ -152,7 +152,7 @@ barchart({
     'oklch(0.9054 0.15455 194.769)',
   ],
   gradientDirection: 'top-to-bottom',
-  gradientMode: 'continuous',
+  gradientMode: 'continuous', // [!code ++]
 });
 ```
 
