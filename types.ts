@@ -21,94 +21,58 @@ type MakeRange<
 type MaxP = MakeRange<101>;
 
 type Percentage = `${MaxP[number]}%`;
+/**
+ * Used for resulting path's [`stroke-linecap`](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/stroke-linecap) attribute
+ */
+type LineCaps = 'round' | 'butt' | 'square';
+/**
+ * Controls whether resulting lines are drawn straight or smooth
+ */
+type LineTypes = 'straight' | 'smooth';
 
-export type ChartOptions = {
+export type BarChartClasses = {
   /**
-   * Controls the resulting SVG `width` attribute.
-   *
-   * Used in some calculations. Leave blank if you get unexpected results.
-   *
-   * Instead use CSS to change the SVG width to any value with no issues!
+   * Name is ambiguous, but attached to parent group of both label & bar groups
    */
-  width: number;
+  groupClass: string;
   /**
-   * Controls the resulting SVG `height` attribute.
-   *
-   * Used in some calculations. Leave blank if you get unexpected results.
-   *
-   * Instead use CSS to change the SVG height to any value with no issues!
+   * Attached to the parent `SVG` element
    */
-  height: number;
+  parentClass: string;
   /**
-   * Controls the "viewBox" width of resulting SVG
-   *
-   * Defaults to width if unset.
-   *
-   * **WARN** Can lead to unexpected results, docs demo usage page is TODO!
+   * Attached to each individual bar `<rect ... />` element
    */
-  vWidth: number;
+  barClass: string;
   /**
-   *
-   * Controls the "viewBox" height of resulting SVG
-   *
-   * Defaults to height if unset.
-   *
-   * **WARN** Can lead to unexpected results, docs demo usage page is TODO!
+   * Attached to the parent `<g>` element which contains the bar elements
    */
-  vHeight: number;
+  barGroupClass: string;
 };
 
-export type ImageLabel = {
+export type LineChartClasses = {
   /**
-   * image source, absolute or relative
+   * Added to resulting `<path>` elements
    */
-  href: string;
+  lineClass: string;
   /**
-   * image alt text
+   * Added to resulting `<g>` tag containing line `<path>` elements
    */
-  alt: string;
+  lineGroupClass: string;
   /**
-   * text placed above the image
+   * Added to resulting parent `<svg>` element
    */
-  topText?: string;
+  parentClass: string;
   /**
-   * text placed below the image
+   * Added to resulting `<text>` elements
    */
-  bottomText?: string;
+  labelClass: string;
   /**
-   * If set used for the image element's height
+   * Added to resulting `<g>` tag containing line `<text>` elements
    */
-  height?: number;
-  /**
-   * If set used for the image element's width
-   */
-  width?: number;
+  labelGroupClass: string;
 };
 
-export type Labels = {
-  /**
-   * Defaults to `#ffffff`
-   * Will alternate between colors if there are less colors than the number of drawn labels.
-   */
-  labelColors: string[];
-  /**
-   * An array of strings attached to various datasets of charts. See chart's themselves for specifics.
-   */
-  labels: string[];
-  /**
-   * "literal" makes data labels display the given number in-place
-   * "percentage" makes data labels display their value as a percentage of the sum of all values in the `data` array
-   */
-  dataLabels: 'literal' | 'percentage';
-  /**
-   * An alternative label format, allowing images, alt text, top text, and bottom text.
-   *
-   * Takes precedence over `labels` if supplied.
-   *
-   * @see {@link ImageLabel}
-   */
-  imageLabels: ImageLabel[];
-
+export type LabelClasses = {
   /**
    * Attached to each individual label `<text>` element
    */
@@ -168,6 +132,93 @@ export type Labels = {
   imageLabelSubGroupClass: string;
 };
 
+export type ChartOptions = {
+  /**
+   * Controls the resulting SVG `width` attribute.
+   *
+   * Used in some calculations. Leave blank if you get unexpected results.
+   *
+   * Instead use CSS to change the SVG width to any value with no issues!
+   */
+  width: number;
+  /**
+   * Controls the resulting SVG `height` attribute.
+   *
+   * Used in some calculations. Leave blank if you get unexpected results.
+   *
+   * Instead use CSS to change the SVG height to any value with no issues!
+   */
+  height: number;
+  /**
+   * Controls the "viewBox" width of resulting SVG
+   *
+   * Defaults to width if unset.
+   *
+   * **WARN** Can lead to unexpected results, docs demo usage page is TODO!
+   */
+  vWidth: number;
+  /**
+   * Controls the "viewBox" height of resulting SVG
+   *
+   * Defaults to height if unset.
+   *
+   * **WARN** Can lead to unexpected results, docs demo usage page is TODO!
+   */
+  vHeight: number;
+};
+
+export type ImageLabel = {
+  /**
+   * image source, absolute or relative
+   */
+  href: string;
+  /**
+   * image alt text
+   */
+  alt: string;
+  /**
+   * text placed above the image
+   */
+  topText?: string;
+  /**
+   * text placed below the image
+   */
+  bottomText?: string;
+  /**
+   * If set used for the image element's height
+   */
+  height?: number;
+  /**
+   * If set used for the image element's width
+   */
+  width?: number;
+};
+
+export type Labels = {
+  /**
+   * Defaults to `#ffffff`
+   * Will alternate between colors if there are less colors than the number of drawn labels.
+   */
+  labelColors: string[];
+  /**
+   * An array of strings attached to various datasets of charts. See chart's themselves for specifics.
+   */
+  labels: string[];
+  /**
+   * "literal" makes data labels display the given number in-place
+   * "percentage" makes data labels display their value as a percentage of the sum of all values in the `data` array
+   */
+  dataLabels: 'literal' | 'percentage';
+  /**
+   * An alternative label format, allowing images, alt text, top text, and bottom text.
+   *
+   * Takes precedence over `labels` if supplied.
+   *
+   * @see {@link ImageLabel}
+   */
+  imageLabels: ImageLabel[];
+};
+
 export type GradientColor = string | `${string}:${Percentage}`;
 
 export type LinearGradientDirection =
@@ -201,23 +252,20 @@ export type ManyLinearGradientOptions = {
   gradientDirection: LinearGradientDirection;
 };
 
-export type BarChartClasses = {
+export type BarChartStyleOptions = {
   /**
-   * Name is ambiguous, but attached to parent group of both label & bar groups
+   * Used as the "fill" on resulting bars.
+   * Defaults to `["#ffffff"]` if not supplied.
    */
-  groupClass: string;
+  fillColors: string[];
   /**
-   * Attached to the parent `SVG` element
+   * Used as the stroke on resulting bars.
    */
-  parentClass: string;
+  strokeColors: string[];
   /**
-   * Attached to each individual bar `<rect ... />` element
+   * Used as the "stroke-width" on resulting bars.
    */
-  barClass: string;
-  /**
-   * Attached to the parent `<g>` element which contains the bar elements
-   */
-  barGroupClass: string;
+  strokeWidths: number[];
 };
 
 export type BarChartOptionsBase = {
@@ -253,62 +301,13 @@ export type BarChartOptionsBase = {
    * Which results in even spacing between all bars based on the available space for the surface the bars are being attached to.
    */
   gap: number;
-  /**
-   * Defaults to `#ffffff`
-   */
-  colors: string[];
-} & BarChartClasses &
-  LinearGradientOptions &
+  // classes: BarChartClasses & LabelClasses;
+} & LinearGradientOptions & // & BarChartClasses
   Labels &
-  ChartOptions;
-
-export type BarChartNumericalOpts = Optional<BarChartOptionsBase> & {
-  /**
-   * A single array of numbers, each number representing a bar.
-   */
-  readonly data: number[];
-};
-
-export type BarChartStackedOpts = Optional<BarChartOptionsBase> & {
-  /**
-   * A 2D array of numbers, each sub-array representing a stack of bars.
-   */
-  readonly data: number[][];
-};
-
-export type BarChartOptions = BarChartNumericalOpts | BarChartStackedOpts;
-
-export type LineChartClasses = {
-  /**
-   * Added to resulting `<path>` elements
-   */
-  lineClass: string;
-  /**
-   * Added to resulting `<g>` tag containing line `<path>` elements
-   */
-  lineGroupClass: string;
-  /**
-   * Added to resulting parent `<svg>` element
-   */
-  parentClass: string;
-  /**
-   * Added to resulting `<text>` elements
-   */
-  labelClass: string;
-  /**
-   * Added to resulting `<g>` tag containing line `<text>` elements
-   */
-  labelGroupClass: string;
-};
-
-/**
- * Used for resulting path's [`stroke-linecap`](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/stroke-linecap) attribute
- */
-type LineCaps = 'round' | 'butt' | 'square';
-/**
- * Controls whether resulting lines are drawn straight or smooth
- */
-type LineTypes = 'straight' | 'smooth';
+  BarChartStyleOptions &
+  ChartOptions & {
+    classes: { [K in keyof (BarChartClasses & LabelClasses)]?: string };
+  };
 
 export type LineChartOptionsBase = {
   /**
@@ -349,15 +348,40 @@ export type LineChartOptionsBase = {
    * Will alternate between colors if there are less colors than the number of drawn lines.
    */
   colors: string | string[];
-};
+} & ChartOptions &
+  LinearGradientOptions &
+  Labels & {
+    classes: { [K in keyof (LineChartClasses & LabelClasses)]?: string };
+  };
 
-export type LineChartOptions = Optional<
-  LineChartOptionsBase &
-    ChartOptions &
-    LinearGradientOptions &
-    LineChartClasses &
-    Labels
-> & {
-  readonly data: number[][] | number[];
-  readonly labels?: string[][] | string[];
-};
+export type BarChartNumericalOpts = Prettify<
+  Optional<BarChartOptionsBase> & {
+    /**
+     * A single array of numbers, each number representing a bar.
+     */
+    readonly data: number[];
+  }
+>;
+
+export type BarChartStackedOpts = Prettify<
+  Optional<BarChartOptionsBase> & {
+    /**
+     * A 2D array of numbers, each sub-array representing a stack of bars.
+     */
+    readonly data: number[][];
+  }
+>;
+
+export type BarChartOptions = BarChartNumericalOpts | BarChartStackedOpts;
+
+export type LineChartOptions = Prettify<
+  Optional<LineChartOptionsBase> & {
+    /**
+     * Array of numbers representing the data points for each line.
+     * If multiple arrays are provided, each array will be used for a separate line.
+     * If a single array is provided, it will be used for one lines.
+     */
+    readonly data: number[][] | number[];
+    // readonly labels?: string[][] | string[]; // Pretty sure this is a mistake since now have the `Labels` type (inb4 errors)
+  }
+>;
