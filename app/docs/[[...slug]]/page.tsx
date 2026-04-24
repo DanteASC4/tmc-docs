@@ -1,13 +1,12 @@
 import { source } from '@/lib/source';
 import { getMDXComponents } from '@/mdx-components';
-import { InlineTOC } from 'fumadocs-ui/components/inline-toc';
-import { createRelativeLink } from 'fumadocs-ui/mdx';
 import {
   DocsBody,
   DocsDescription,
   DocsPage,
   DocsTitle,
-} from 'fumadocs-ui/page';
+} from 'fumadocs-ui/layouts/docs/page';
+import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { notFound } from 'next/navigation';
 
 export default async function Page(props: {
@@ -20,13 +19,14 @@ export default async function Page(props: {
   const MDXContent = page.data.body;
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
+    <DocsPage
+      toc={page.data.toc}
+      full={page.data.full}
+      tableOfContent={{
+        style: 'clerk',
+      }}>
       <DocsTitle>{page.data.title}</DocsTitle>
-      <div>
-        <DocsDescription>{page.data.description}</DocsDescription>
-        <InlineTOC items={page.data.toc} />
-        <br />
-      </div>
+      <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
         <MDXContent
           components={getMDXComponents({

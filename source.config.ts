@@ -22,6 +22,7 @@ export const docs = defineDocs({
 export default defineConfig({
   mdxOptions: {
     rehypeCodeOptions: {
+      langs: ['ts', 'tsx', 'js', 'jsx'],
       themes: {
         light: 'github-light',
         dark: 'github-dark',
@@ -34,7 +35,6 @@ export default defineConfig({
             compilerOptions: {
               lib: ['es2022', 'dom'],
               strict: true,
-              typeRoots: ['/node_modules/@types', '@types'],
               module: 99,
               target: 99,
             },

@@ -1,0 +1,115 @@
+---
+title: Twoslash Examples
+description: Practical Twoslash patterns for direct imports, hidden setup, errors, and completions.
+---
+
+This page is a small reference for the Twoslash patterns that work well in this repo.
+
+Hover highlighted identifiers when you want popup details, and use inline queries like `^?` and `^|` when you want the docs page to show the result directly.
+
+## Import Types Directly
+
+The simplest setup is just importing the types you want to demonstrate from `./types`.
+
+```ts twoslash
+import type { BarChartNumericalOpts } from './types';
+
+const options: BarChartNumericalOpts = {
+  data: [12, 24, 18],
+  placement: 'bottom',
+};
+
+const placement = options.placement;
+//    ^?
+```
+
+## Import Exact Module Types
+
+If you want the sample to point at the source module directly, importing still works fine.
+
+```ts twoslash
+import type {
+  BarChartNumericalOpts,
+  ImageLabel,
+  LineChartOptions,
+} from './types';
+
+const imageLabels: ImageLabel[] = [
+  {
+    href: '/toomanycharts/imgs/misc/logo.png',
+    alt: 'TooManyCharts logo',
+    topText: 'Docs',
+  },
+];
+
+const barOptions: BarChartNumericalOpts = {
+  data: [12, 24, 18],
+  placement: 'bottom',
+  imageLabels,
+};
+
+const importedPlacement = barOptions.placement;
+//    ^?
+
+const lineOptions: LineChartOptions = {
+  data: [4, 8, 15, 16, 23, 42],
+  lineType: 'smooth',
+};
+
+const lineGroupClass = lineOptions.classes?.lineGroupClass;
+//    ^?
+```
+
+## Hide Setup, Show Only The Useful Bit
+
+If you want imports or helper setup to exist for the compiler but not clutter the rendered docs, use `// ---cut---`.
+
+```ts twoslash
+import type { LineChartOptions } from './types';
+
+const lineOptions: LineChartOptions = {
+  data: [4, 8, 15, 16, 23, 42],
+  lineType: 'smooth',
+};
+
+// ---cut---
+const lineType = lineOptions.lineType;
+//    ^?
+```
+
+## Show Expected Errors
+
+When the sample is supposed to fail, declare the expected TypeScript error code so the build stays green.
+
+```ts twoslash
+import type { BarChartNumericalOpts } from './types';
+
+// @errors: 2322
+const broken: BarChartNumericalOpts = {
+  data: [12, 24, 18],
+  placement: 'center',
+  // [!code error]
+};
+```
+
+## Show Completions
+
+Use `^|` when you want the page to show completion results instead of a type query.
+
+```ts twoslash
+import type { LineChartOptions } from './types';
+
+// @noErrors
+const options: LineChartOptions = {
+  data: [1, 2, 3],
+};
+
+options.lin;
+//      ^|
+```
+
+<Callout type="info">
+  Since Twoslash compiles each code fence as a tiny TypeScript program during
+  the build, direct imports are enough. If you do not want imports shown in the
+  rendered docs, keep them above a `// ---cut---` marker.
+</Callout>
