@@ -3,6 +3,16 @@
 // THIS IS FROM THE MAIN REPOs `src/types.ts` DO NOT EDIT HERE!
 //
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//    ███    █▄      ███      ▄█   ▄█        ▄█      ███     ▄██   ▄
+//    ███    ███ ▀█████████▄ ███  ███       ███  ▀█████████▄ ███   ██▄
+//    ███    ███    ▀███▀▀██ ███▌ ███       ███▌    ▀███▀▀██ ███▄▄▄███
+//    ███    ███     ███   ▀ ███▌ ███       ███▌     ███   ▀ ▀▀▀▀▀▀███
+//    ███    ███     ███     ███▌ ███       ███▌     ███     ▄██   ███
+//    ███    ███     ███     ███  ███       ███      ███     ███   ███
+//    ███    ███     ███     ███  ███▌    ▄ ███      ███     ███   ███
+//    ████████▀     ▄████▀   █▀   █████▄▄██ █▀      ▄████▀    ▀█████▀
+//                                ▀
+
 export type Optional<T> = {
   [K in keyof T]?: T[K];
 };
@@ -13,7 +23,7 @@ export type Prettify<T> = {
 
 type MakeRange<
   N extends number,
-  Result extends Array<unknown> = []
+  Result extends Array<unknown> = [],
 > = Result['length'] extends N
   ? Result
   : MakeRange<N, [...Result, Result['length']]>;
@@ -21,6 +31,16 @@ type MakeRange<
 type MaxP = MakeRange<101>;
 
 type Percentage = `${MaxP[number]}%`;
+
+//       ▄▄▄▄███▄▄▄▄    ▄█     ▄████████  ▄████████
+//     ▄██▀▀▀███▀▀▀██▄ ███    ███    ███ ███    ███
+//     ███   ███   ███ ███▌   ███    █▀  ███    █▀
+//     ███   ███   ███ ███▌   ███        ███
+//     ███   ███   ███ ███▌ ▀███████████ ███
+//     ███   ███   ███ ███           ███ ███    █▄
+//     ███   ███   ███ ███     ▄█    ███ ███    ███
+//      ▀█   ███   █▀  █▀    ▄████████▀  ████████▀
+
 /**
  * Used for resulting path's [`stroke-linecap`](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Attribute/stroke-linecap) attribute
  */
@@ -30,6 +50,38 @@ type LineCaps = 'round' | 'butt' | 'square';
  */
 type LineTypes = 'straight' | 'smooth';
 
+export type AsciiBarCharacter =
+  | 'solid'
+  | 'light'
+  | 'medium'
+  | 'dark'
+  | (string & {});
+
+type AsciiBasicColors =
+  | 'black'
+  | 'red'
+  | 'green'
+  | 'yellow'
+  | 'blue'
+  | 'magenta'
+  | 'cyan'
+  | 'white'
+  | 'gray';
+
+type HexString = `#${string}`;
+type RGBObj = { r: number; g: number; b: number };
+
+export type AsciiColors = (AsciiBasicColors | HexString | RGBObj)[];
+
+//     ▄████████  ▄█          ▄████████    ▄████████    ▄████████    ▄████████    ▄████████
+//    ███    ███ ███         ███    ███   ███    ███   ███    ███   ███    ███   ███    ███
+//    ███    █▀  ███         ███    ███   ███    █▀    ███    █▀    ███    █▀    ███    █▀
+//    ███        ███         ███    ███   ███          ███         ▄███▄▄▄       ███
+//    ███        ███       ▀███████████ ▀███████████ ▀███████████ ▀▀███▀▀▀     ▀███████████
+//    ███    █▄  ███         ███    ███          ███          ███   ███    █▄           ███
+//    ███    ███ ███▌    ▄   ███    ███    ▄█    ███    ▄█    ███   ███    ███    ▄█    ███
+//    ████████▀  █████▄▄██   ███    █▀   ▄████████▀   ▄████████▀    ██████████  ▄████████▀
+//               ▀
 export type BarChartClasses = {
   /**
    * Name is ambiguous, but attached to parent group of both label & bar groups
@@ -47,6 +99,46 @@ export type BarChartClasses = {
    * Attached to the parent `<g>` element which contains the bar elements
    */
   barGroupClass: string;
+};
+
+export type PieChartClasses = {
+  /**
+   * Attached to the parent `SVG` element
+   */
+  parentClass: string;
+  /**
+   * Attached to each individual slice `<path ... />` element
+   */
+  sliceClass: string;
+  // TODO: Determine if `sliceGroupClass` needed
+  /**
+   * Attached to the parent `<g>` element which contains the bar elements
+   */
+  sliceGroupClass: string;
+  /**
+   * Attached to the centered `<text>` element (if `centerLabel` option supplied)
+   */
+  centerLabelClass: string;
+};
+
+export type DonutChartClasses = {
+  /**
+   * Attached to the parent `SVG` element
+   */
+  parentClass: string;
+  /**
+   * Attached to each individual slice `<path ... />` element
+   */
+  sliceClass: string;
+  // TODO: Determine if `sliceGroupClass` needed
+  /**
+   * Attached to the parent `<g>` element which contains the bar elements
+   */
+  sliceGroupClass: string;
+  /**
+   * Attached to the centered `<text>` element (if `centerLabel` option supplied)
+   */
+  centerLabelClass: string;
 };
 
 export type LineChartClasses = {
@@ -132,6 +224,16 @@ export type LabelClasses = {
   imageLabelSubGroupClass: string;
 };
 
+//     ▄██████▄     ▄███████▄     ███      ▄█   ▄██████▄  ███▄▄▄▄      ▄████████
+//    ███    ███   ███    ███ ▀█████████▄ ███  ███    ███ ███▀▀▀██▄   ███    ███
+//    ███    ███   ███    ███    ▀███▀▀██ ███▌ ███    ███ ███   ███   ███    █▀
+//    ███    ███   ███    ███     ███   ▀ ███▌ ███    ███ ███   ███   ███
+//    ███    ███ ▀█████████▀      ███     ███▌ ███    ███ ███   ███ ▀███████████
+//    ███    ███   ███            ███     ███  ███    ███ ███   ███          ███
+//    ███    ███   ███            ███     ███  ███    ███ ███   ███    ▄█    ███
+//     ▀██████▀   ▄████▀         ▄████▀   █▀    ▀██████▀   ▀█   █▀   ▄████████▀
+//
+
 export type ChartOptions = {
   /**
    * Controls the resulting SVG `width` attribute.
@@ -194,6 +296,7 @@ export type ImageLabel = {
   width?: number;
 };
 
+// TODO rename "Labels" -> "LabelOptions"
 export type Labels = {
   /**
    * Defaults to `#ffffff`
@@ -252,7 +355,7 @@ export type ManyLinearGradientOptions = {
   gradientDirection: LinearGradientDirection;
 };
 
-export type BarChartStyleOptions = {
+export type GeneralChartStyleOptions = {
   /**
    * Used as the "fill" on resulting bars.
    * Defaults to `["#ffffff"]` if not supplied.
@@ -304,9 +407,51 @@ export type BarChartOptionsBase = {
   // classes: BarChartClasses & LabelClasses;
 } & LinearGradientOptions & // & BarChartClasses
   Labels &
-  BarChartStyleOptions &
+  GeneralChartStyleOptions &
   ChartOptions & {
     classes: { [K in keyof (BarChartClasses & LabelClasses)]?: string };
+  };
+
+type CircleChartCenterLabelOptions = {
+  centerLabel: 'sum' | string;
+  centerLabelColor: string;
+  centerLabelFontSize: number | number;
+  centerLabelFontWeight: string | number;
+  centerLabelFontFamily: string;
+};
+
+export type PieChartOptionsBase = {
+  /**
+   * Defaults to `300`
+   */
+  size: number;
+  /**
+   * Defaults to `15`
+   */
+  padding: number;
+} & LinearGradientOptions &
+  Labels &
+  CircleChartCenterLabelOptions &
+  GeneralChartStyleOptions &
+  Omit<ChartOptions, 'width' | 'height'> & {
+    classes: { [K in keyof (PieChartClasses & LabelClasses)]?: string };
+  };
+
+export type DonutChartOptionsBase = {
+  /**
+   * Defaults to `300`
+   */
+  size: number;
+  /**
+   * Defaults to `15`
+   */
+  padding: number;
+} & LinearGradientOptions &
+  Labels &
+  CircleChartCenterLabelOptions &
+  GeneralChartStyleOptions &
+  Omit<ChartOptions, 'width' | 'height'> & {
+    classes: { [K in keyof (DonutChartClasses & LabelClasses)]?: string };
   };
 
 export type LineChartOptionsBase = {
@@ -354,6 +499,27 @@ export type LineChartOptionsBase = {
     classes: { [K in keyof (LineChartClasses & LabelClasses)]?: string };
   };
 
+// This will get cleaned up later
+export type AsciiBarChartOptionsBase = {
+  /**
+   * Defaults to `"bottom"` if not supplied
+   */
+  placement: 'top' | 'right' | 'bottom' | 'left';
+  barCharacter: AsciiBarCharacter;
+  barWidth: number;
+  gap: number;
+  height: number;
+  width: number;
+  colors: AsciiColors;
+  title: string;
+  dataLabels:
+    | 'literal'
+    | 'percentage'
+    | ((v: number, i: number, ...args: unknown[]) => string);
+  dataLabelColors: AsciiColors;
+};
+
+// TODO rename `Opts` -> `Options`
 export type BarChartNumericalOpts = Prettify<
   Optional<BarChartOptionsBase> & {
     /**
@@ -363,6 +529,7 @@ export type BarChartNumericalOpts = Prettify<
   }
 >;
 
+// TODO rename `Opts` -> `Options`
 export type BarChartStackedOpts = Prettify<
   Optional<BarChartOptionsBase> & {
     /**
@@ -372,6 +539,25 @@ export type BarChartStackedOpts = Prettify<
   }
 >;
 
+export type PieChartOptions = Prettify<
+  Optional<PieChartOptionsBase> & {
+    /**
+     * A single array of numbers, each number representing a slice of the pie.
+     */
+    readonly data: number[];
+  }
+>;
+
+export type DonutChartOptions = Prettify<
+  Optional<DonutChartOptionsBase> & {
+    /**
+     * A single array of numbers, each number representing a slice of the pie.
+     */
+    readonly data: number[];
+  }
+>;
+
+// STUB - is this even used anywhere?
 export type BarChartOptions = BarChartNumericalOpts | BarChartStackedOpts;
 
 export type LineChartOptions = Prettify<
@@ -383,5 +569,14 @@ export type LineChartOptions = Prettify<
      */
     readonly data: number[][] | number[];
     // readonly labels?: string[][] | string[]; // Pretty sure this is a mistake since now have the `Labels` type (inb4 errors)
+  }
+>;
+
+export type AsciiBarChartOptions = Prettify<
+  Optional<AsciiBarChartOptionsBase> & {
+    /**
+     * A single array of numbers, each number representing a bar.
+     */
+    readonly data: number[];
   }
 >;

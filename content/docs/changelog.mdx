@@ -3,6 +3,36 @@ title: Changelog
 description: What's new?
 ---
 
+# 0.2.2
+
+<span className="text-rose-500 font-bold">Dev Note</span>
+
+After a long break I came back and finished up the initial implementation of the `asciiBarchart` I'd been working on. While I plan to continue with ASCII chart types I felt there was still plenty more worthwhile things to add in to SVG charts. The big one being two very common chart types - pie & donut charts! Those have both been added.
+
+Next up I will be doing some cleanup / refinement of the codebase. Standardizing some things across chart types, doing some type naming adjustments, etc... You can check the `TODO.md` in the repo for specifics.
+
+After cleanup & refinement I'll be doing work on getting framework specific exports working.
+
+
+<span className="text-green-400 font-bold">New</span>
+
+- `piechart`
+  - <Link to="/toomanycharts/docs/charts-api/piechart">API</Link>
+  - <Link to="/toomanycharts/docs/examples/piechart-examples">Examples</Link>
+- `donutchart`
+  - <Link to="/toomanycharts/docs/charts-api/donutchart">API</Link>
+  - <Link to="/toomanycharts/docs/examples/donutchart-examples">Examples</Link>
+
+<span className="text-magenta-400 font-bold">Experimental</span>
+
+Experimental features are features that are in the early stages of development, and may be subject to change or removal without a major version bump.
+
+- `asciiBarchart`
+  - <Link to="/toomanycharts/docs/charts-api/asciiBarchart">API</Link>
+  - <Link to="/toomanycharts/docs/examples/asciiBarchart-examples">
+      Examples
+    </Link>
+
 # 0.2.1
 
 <span className="text-red-400 font-bold">Breaking Changes</span>
@@ -44,13 +74,13 @@ description: What's new?
 
 # 0.1.8
 
-<span className="text-info-400 font-bold">Fixes</span>
+<span className="text-blue-400 font-bold">Fixes</span>
 
 - Removed some console logs from `linechart`
 
 # 0.1.7
 
-<span className="text-info-400 font-bold">Fixes</span>
+<span className="text-blue-400 font-bold">Fixes</span>
 
 - Fixed `lineType: "smooth"`
   - All lines now perfectly smooth, regardless of the amount of datapoints!

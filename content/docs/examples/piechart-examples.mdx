@@ -1,0 +1,228 @@
+---
+title: Piechart Examples
+description: Let's get cooking!
+---
+
+# `piechart`
+
+```ts
+const myChart = piechart({
+  data: [30, 30, 30],
+});
+
+document.body.appendChild(myChart);
+```
+
+Just a reminder that `piechart` returns an SVG, so you'll want to add it to the DOM.
+
+## Quick Start
+
+The most basic possible usage:
+
+```ts
+piechart({
+  data: [30, 30, 30],
+  fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+});
+```
+
+<p className="text-xs text-italic">
+  {' '}
+  colors are given to make the slices visible, but are not required, though
+  without color or stroke colors you'll likely end up with just a circle
+  visually!{' '}
+</p>
+
+[The First Chart](/imgs/examples/piechart/ex0.svg)
+
+Of course it works with different data points too:
+
+```ts
+piechart({
+  data: [300, 300, 300, 300],
+  fillColors: ['#00ffff', '#ff00ff', '#ffff00', '#d4453a'],
+});
+```
+
+[Basic pie chart with more datapoints](/imgs/examples/piechart/ex0a.svg)
+
+```ts
+piechart({
+  data: [50, 50],
+  fillColors: ['#00ffff', '#ff00ff'],
+});
+```
+
+[Basic pie chart with less datapoints](/imgs/examples/piechart/ex0b.svg)
+
+```ts
+piechart({
+  data: [400, 100, 300, 70, 130],
+  fillColors: ['#00ffff', '#ff00ff', '#ffff00', '#d4453a', '#3e9503'],
+});
+```
+
+[Basic pie chart with more and larger datapoints](/imgs/examples/piechart/ex0c.svg)
+
+## Label Options
+
+You can use any string for the `labels` option, and they will be placed in the center of each pie slice.
+
+Coloring is done via `labelColors`, which takes an array of colors that correspond to the labels. If not provided, the labels will default to white.
+
+```ts
+piechart({
+  data: [30, 30, 30],
+  fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+  labels: ['Cyan', 'Magenta', 'Yellow'], // [!code ++]
+  labelColors: ['#000000'], // [!code ++]
+});
+```
+
+[A pie chart with labels and label colors](/imgs/examples/piechart/ex1.svg)
+
+### Data Labels
+
+Or you can use the `dataLabels` option to show the data values instead of custom labels:
+
+<p className="text-xs text-italic"> `labelColors` also is used to color `dataLabels`. </p>
+```ts
+piechart({
+  data: [30, 30, 30],
+  fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+  dataLabels: 'literal', // [!code ++]
+  labelColors: ['#000000'],
+});
+```
+
+[A pie chart with data labels](/imgs/examples/piechart/ex2.svg)
+
+The `dataLabels` option also accept `"percentage"`:
+
+```ts
+piechart({
+  data: [30, 30, 30],
+  fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+  // [!code word:percentage]
+  dataLabels: 'percentage',
+  labelColors: ['#000000'],
+});
+```
+
+[A pie chart with percentage data labels](/imgs/examples/piechart/ex3.svg)
+
+### Center Label
+
+The `centerLabel` option allows you to place a label in the center of the pie chart, which can be used to show a title or other value.
+
+```ts
+piechart({
+  data: [30, 30, 30],
+  fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+  centerLabel: 'A center label', // [!code ++]
+});
+```
+
+[A pie chart with a center label](/imgs/examples/piechart/ex3a.svg)
+
+If you set the `centerLabel` option to `"sum"` the center label will show the sum of the data values:
+
+```ts
+piechart({
+  data: [30, 30, 30],
+  fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+  // [!code word:sum]
+  centerLabel: 'sum',
+});
+```
+
+[A pie chart with the sum of the data values as the center label](/imgs/examples/piechart/ex3b.svg)
+
+**Adjusting center label styles**
+
+There are a couple options that allow for adjustment of common title text styles for the center label.
+
+- `centerLabelFontSize`
+  - defaults to `32`
+- `centerLabelFontWeight`
+  - defaults to `bold`
+- `centerLabelFontFamily`
+  - defaults to `monospace`
+
+The `centerLabel` will also get a class applied by default that you can use to override the default styling - `"tmc-pie-center-label"`.
+
+You can also use the `centerLabelClass` option to add your own class to the center label `<text>` element.
+
+```ts
+piechart({
+  data: [30, 30, 30],
+  fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+  centerLabel: 'A center label', // [!code ++]
+  classes: {
+    centerLabelClass: 'my-center-label', // [!code ++]
+  },
+});
+```
+
+## Styling
+
+While styling many options is easily achievable with CSS, there are various styling options available for quick & easy use.
+
+### Size & Spacing
+
+The `size` option will change the size of the chart. By default the `size` is `300` which creates a `300px` square, note that all pie charts are squares!
+
+```ts
+piechart({
+  data: [30, 30, 30],
+  fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+  size: 50, // [!code ++]
+});
+```
+
+[A very small pie chart](/imgs/examples/piechart/ex4.svg)
+
+You can also change the `padding` which is the interior spacing from the SVG edges to the pie chart itself.
+
+Note that currently `padding` is used uniformly on all sides.
+
+```ts
+piechart({
+  data: [30, 30, 30],
+  fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+  padding: 50, // [!code ++]
+});
+```
+
+[A pie chart with a lot of padding](/imgs/examples/piechart/ex5.svg)
+
+### Coloring
+
+While `fillColors` is the way to color each slice, you can also set `strokeColors`, and `strokeWidths` to customize the stroke of each slice.
+
+If you want them all to be uniform, simply provide a single value for each option.
+
+```ts
+piechart({
+  data: [30, 30, 30],
+  fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+  strokeColors: ['#ffffff'],
+  strokeWidths: [5],
+});
+```
+
+[A pie chart with white strokes](/imgs/examples/piechart/ex6.svg)
+
+Additionally, just like other chart types, gradient fills are supported!
+
+```ts
+piechart({
+  data: [30, 30, 30],
+  gradientColors: ['#ff00ff', '#00ffff'],
+  gradientDirection: 'left-to-right', // [!code ++]
+  gradientMode: 'continuous', // [!code ++]
+  strokeColors: ['#ffffff'],
+});
+```
+
+[A pie chart with a continuous gradient fill](/imgs/examples/piechart/ex7.svg)
