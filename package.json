@@ -1,5 +1,5 @@
 {
-  "name": "toomanychart-docs-site",
+  "name": "jgmc-docs-site",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -12,6 +12,8 @@
     "check": "deno run -A npm:@biomejs/biome check --write"
   },
   "dependencies": {
+    "@codesandbox/sandpack-react": "^2.20.0",
+    "@jgmc/vanilla": "^0.5.0",
     "@orama/orama": "^3.1.18",
     "fumadocs-core": "16.8.3",
     "fumadocs-mdx": "14.3.1",

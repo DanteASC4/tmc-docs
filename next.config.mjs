@@ -7,8 +7,8 @@ const config = {
   reactStrictMode: true,
   output: 'export',
   images: { unoptimized: true },
-  basePath: '/toomanycharts',
-  assetPrefix: '/toomanycharts/',
+  basePath: '/jgmc',
+  assetPrefix: '/jgmc/',
   serverExternalPackages: ['typescript', 'twoslash']
 };
 

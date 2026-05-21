@@ -7,16 +7,23 @@ description: The first chart type
 
 Loads of examples!
 
+
+
 Just a reminder that `barchart` returns an SVG, so to use the output you'll want to add it to the DOM however your framework of choice handles it.
+
+<SideBySide>
 
 ```ts
 const myChart = barchart({
   data: [50, 100, 30],
 });
 
-document.body.appendChild(myChart);
+document.body.setHTML(myChart);
 ```
 
+<StaticChart options={{ data: [50, 100, 30] }} type="barchart" />
+
+</SideBySide>
 
 ## From Quick Start
 
@@ -289,3 +296,12 @@ Regardless, here's a table & visual guide for all placement options!
 | "left"    | "left center"              |
 
 ![A visual guide of the above table](/imgs/examples/barchart/visual-guide.png)
+
+## Try It Out!
+
+<LiveChart initialCode={`
+import { barchart } from "@jgmc/vanilla";
+
+const svgString = barchart({ data: [10, 50, 30] });
+document.getElementById("app").innerHTML = svgString;
+`} />
