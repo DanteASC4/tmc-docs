@@ -2,3 +2,14 @@
 @import 'fumadocs-ui/css/preset.css';
 @import 'fumadocs-ui/css/black.css';
 @import 'fumadocs-twoslash/twoslash.css';
+
+/* Keep layout width stable when navigating between short and long pages. */
+html {
+  scrollbar-gutter: stable;
+}
+
+@supports not (scrollbar-gutter: stable) {
+  html {
+    overflow-y: scroll;
+  }
+}

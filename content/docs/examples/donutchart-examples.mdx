@@ -19,6 +19,8 @@ Just a reminder that `piechart` returns an SVG, so you'll want to add it to the 
 
 The most basic possible usage:
 
+<SideBySide>
+
 ```ts
 donutchart({
   data: [30, 30, 30],
@@ -26,16 +28,26 @@ donutchart({
 });
 ```
 
-<p className="text-xs text-italic">
+<div className="text-xs text-italic">
   {' '}
   colors are given to make the slices visible, but are not required, though
   without color or stroke colors you'll likely end up with just a circle
   visually!{' '}
-</p>
+</div>
 
-[The First Chart](/imgs/examples/donutchart/ex0.svg)
+<StaticChart
+  options={{
+    data: [30, 30, 30],
+    fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+  }}
+  type="donutchart"
+/>
+
+</SideBySide>
 
 Of course it works with different data points too:
+
+<SideBySide>
 
 ```ts
 donutchart({
@@ -44,7 +56,17 @@ donutchart({
 });
 ```
 
-[Basic donut chart with more datapoints](/imgs/examples/donutchart/ex0a.svg)
+<StaticChart
+  options={{
+    data: [300, 300, 300, 300],
+    fillColors: ['#00ffff', '#ff00ff', '#ffff00', '#d4453a'],
+  }}
+  type="donutchart"
+/>
+
+</SideBySide>
+
+<SideBySide>
 
 ```ts
 donutchart({
@@ -53,7 +75,14 @@ donutchart({
 });
 ```
 
-[Basic donut chart with less datapoints](/imgs/examples/donutchart/ex0b.svg)
+<StaticChart
+  options={{ data: [50, 50], fillColors: ['#00ffff', '#ff00ff'] }}
+  type="donutchart"
+/>
+
+</SideBySide>
+
+<SideBySide>
 
 ```ts
 donutchart({
@@ -62,13 +91,23 @@ donutchart({
 });
 ```
 
-[Basic donut chart with more and larger datapoints](/imgs/examples/donutchart/ex0c.svg)
+<StaticChart
+  options={{
+    data: [400, 100, 300, 70, 130],
+    fillColors: ['#00ffff', '#ff00ff', '#ffff00', '#d4453a', '#3e9503'],
+  }}
+  type="donutchart"
+/>
+
+</SideBySide>
 
 ## Label Options
 
 You can use any string for the `labels` option, and they will be placed in the center of each donut slice.
 
 Coloring is done via `labelColors`, which takes an array of colors that correspond to the labels. If not provided, the labels will default to white.
+
+<SideBySide>
 
 ```ts
 donutchart({
@@ -79,25 +118,53 @@ donutchart({
 });
 ```
 
-[A donut chart with labels and label colors](/imgs/examples/donutchart/ex1.svg)
+<StaticChart
+  options={{
+    data: [30, 30, 30],
+    fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+    labels: ['Cyan', 'Magenta', 'Yellow'],
+    labelColors: ['#000000'],
+  }}
+  type="donutchart"
+/>
+
+</SideBySide>
 
 ### Data Labels
 
 Or you can use the `dataLabels` option to show the data values instead of custom labels:
 
-<p className="text-xs text-italic"> `labelColors` also is used to color `dataLabels`. </p>
+<div className="text-xs text-italic">
+  {' '}
+  `labelColors` also is used to color `dataLabels`.{' '}
+</div>
+
+<SideBySide>
+
 ```ts
 donutchart({
-	data: [30, 30, 30],
-	fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
-	dataLabels: 'literal', // [!code ++]
-	labelColors: ['#000000'],
+  data: [30, 30, 30],
+  fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+  dataLabels: 'literal', // [!code ++]
+  labelColors: ['#000000'],
 });
 ```
 
-[A donut chart with data labels](/imgs/examples/donutchart/ex2.svg)
+<StaticChart
+  options={{
+    data: [30, 30, 30],
+    fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+    dataLabels: 'literal',
+    labelColors: ['#000000'],
+  }}
+  type="donutchart"
+/>
+
+</SideBySide>
 
 The `dataLabels` option also accept `"percentage"`:
+
+<SideBySide>
 
 ```ts
 donutchart({
@@ -109,11 +176,23 @@ donutchart({
 });
 ```
 
-[A donut chart with percentage data labels](/imgs/examples/donutchart/ex3.svg)
+<StaticChart
+  options={{
+    data: [30, 30, 30],
+    fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+    dataLabels: 'percentage',
+    labelColors: ['#000000'],
+  }}
+  type="donutchart"
+/>
+
+</SideBySide>
 
 ### Center Label
 
 The `centerLabel` option allows you to place a label in the center of the donut chart, which can be used to show a title or other value.
+
+<SideBySide>
 
 ```ts
 donutchart({
@@ -123,9 +202,20 @@ donutchart({
 });
 ```
 
-[A donut chart with a center label](/imgs/examples/donutchart/ex3a.svg)
+<StaticChart
+  options={{
+    data: [30, 30, 30],
+    fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+    centerLabel: 'A center label',
+  }}
+  type="donutchart"
+/>
+
+</SideBySide>
 
 If you set the `centerLabel` option to `"sum"` the center label will show the sum of the data values:
+
+<SideBySide>
 
 ```ts
 donutchart({
@@ -136,7 +226,16 @@ donutchart({
 });
 ```
 
-[A donut chart with the sum of the data values as the center label](/imgs/examples/donutchart/ex3b.svg)
+<StaticChart
+  options={{
+    data: [30, 30, 30],
+    fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+    centerLabel: 'sum',
+  }}
+  type="donutchart"
+/>
+
+</SideBySide>
 
 **Adjusting center label styles**
 
@@ -172,6 +271,8 @@ While styling many options is easily achievable with CSS, there are various styl
 
 The `size` option will change the size of the chart. By default the `size` is `300` which creates a `300px` square, note that all donut charts are squares!
 
+<SideBySide>
+
 ```ts
 donutchart({
   data: [30, 30, 30],
@@ -180,11 +281,22 @@ donutchart({
 });
 ```
 
-[A very small donut chart](/imgs/examples/donutchart/ex4.svg)
+<StaticChart
+  options={{
+    data: [30, 30, 30],
+    fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+    size: 50,
+  }}
+  type="donutchart"
+/>
+
+</SideBySide>
 
 You can also change the `padding` which is the interior spacing from the SVG edges to the donut chart itself.
 
 Note that currently `padding` is used uniformly on all sides.
+
+<SideBySide>
 
 ```ts
 donutchart({
@@ -194,13 +306,24 @@ donutchart({
 });
 ```
 
-[A donut chart with a lot of padding](/imgs/examples/donutchart/ex5.svg)
+<StaticChart
+  options={{
+    data: [30, 30, 30],
+    fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+    padding: 50,
+  }}
+  type="donutchart"
+/>
+
+</SideBySide>
 
 ### Coloring
 
 While `fillColors` is the way to color each slice, you can also set `strokeColors`, and `strokeWidths` to customize the stroke of each slice.
 
 If you want them all to be uniform, simply provide a single value for each option.
+
+<SideBySide>
 
 ```ts
 donutchart({
@@ -211,9 +334,21 @@ donutchart({
 });
 ```
 
-[A donut chart with white strokes](/imgs/examples/donutchart/ex6.svg)
+<StaticChart
+  options={{
+    data: [30, 30, 30],
+    fillColors: ['#00ffff', '#ff00ff', '#ffff00'],
+    strokeColors: ['#ffffff'],
+    strokeWidths: [5],
+  }}
+  type="donutchart"
+/>
+
+</SideBySide>
 
 Additionally, just like other chart types, gradient fills are supported!
+
+<SideBySide>
 
 ```ts
 donutchart({
@@ -225,4 +360,15 @@ donutchart({
 });
 ```
 
-[A donut chart with a continuous gradient fill](/imgs/examples/donutchart/ex7.svg)
+<StaticChart
+  options={{
+    data: [30, 30, 30],
+    gradientColors: ['#ff00ff', '#00ffff'],
+    gradientDirection: 'left-to-right',
+    gradientMode: 'continuous',
+    strokeColors: ['#ffffff'],
+  }}
+  type="donutchart"
+/>
+
+</SideBySide>

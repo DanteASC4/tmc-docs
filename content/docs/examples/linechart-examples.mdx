@@ -13,6 +13,8 @@ Simple usage for some simple line charts.
 
 ### Basic As It Gets
 
+<SideBySide>
+
 ```ts
 const myLineChart = linechart({
   data: [50, 100, 30],
@@ -21,9 +23,13 @@ const myLineChart = linechart({
 document.body.appendChild(myLineChart);
 ```
 
-![A basic line chart](/imgs/examples/linechart/ex1.svg)
+<StaticChart options={{ data: [50, 100, 30] }} type="linechart" />
+
+</SideBySide>
 
 ### More Data
+
+<SideBySide>
 
 ```ts
 linechart({
@@ -31,11 +37,18 @@ linechart({
 });
 ```
 
-![](/imgs/examples/linechart/ex2.svg)
+<StaticChart
+  options={{ data: [10, 20, 10, 20, 10, 20, 50, 100] }}
+  type="linechart"
+/>
+
+</SideBySide>
 
 ### Full-Width Line
 
 While not obvious here, lines by default will not reach the bounds of their container, this behavior can be changed with the `fullWidthLine` option.
+
+<SideBySide>
 
 ```ts
 linechart({
@@ -44,7 +57,12 @@ linechart({
 });
 ```
 
-![](/imgs/examples/linechart/ex3.svg)
+<StaticChart
+  options={{ data: [10, 20, 10, 20, 10, 20, 50, 100], fullWidthLine: true }}
+  type="linechart"
+/>
+
+</SideBySide>
 
 ## Styling
 
@@ -54,6 +72,8 @@ Line charts have a few different styling parameters available.
 
 The `colors` parameter allows for coloring lines, a single string or array of color strings are accepted.
 
+<SideBySide>
+
 ```ts
 linechart({
   data: [50, 100, 30],
@@ -61,11 +81,18 @@ linechart({
 });
 ```
 
-![](/imgs/examples/linechart/ex4.svg)
+<StaticChart
+  options={{ data: [50, 100, 30], colors: 'red' }}
+  type="linechart"
+/>
+
+</SideBySide>
 
 ### Thicker Line
 
 The line's thickness is also adjustable!
+
+<SideBySide>
 
 ```ts
 linechart({
@@ -75,11 +102,18 @@ linechart({
 });
 ```
 
-![](/imgs/examples/linechart/ex5.svg)
+<StaticChart
+  options={{ data: [50, 100, 30], colors: 'red', thickness: 10 }}
+  type="linechart"
+/>
+
+</SideBySide>
 
 ### Smooth Line
 
 Making the line smooth is also simple, just set `lineType` to `"smooth"`! For now though the smoothness amount isn't tweakable, but it will be.
+
+<SideBySide>
 
 ```ts
 linechart({
@@ -90,11 +124,23 @@ linechart({
 });
 ```
 
-![](/imgs/examples/linechart/ex6.svg)
+<StaticChart
+  options={{
+    data: [50, 100, 30],
+    colors: 'red',
+    thickness: 10,
+    lineType: 'smooth',
+  }}
+  type="linechart"
+/>
+
+</SideBySide>
 
 ### Gradients
 
 Gradients, get your gradients!
+
+<SideBySide>
 
 ```ts
 linechart({
@@ -105,9 +151,21 @@ linechart({
 });
 ```
 
-![](/imgs/examples/linechart/ex7.svg)
+<StaticChart
+  options={{
+    data: [50, 100, 30],
+    thickness: 10,
+    lineType: 'smooth',
+    gradientColors: ['#ff00ff', '#00ffff'],
+  }}
+  type="linechart"
+/>
+
+</SideBySide>
 
 Let's have the gradient go from top to bottom instead.
+
+<SideBySide>
 
 ```ts
 linechart({
@@ -119,7 +177,18 @@ linechart({
 });
 ```
 
-![](/imgs/examples/linechart/ex8.svg)
+<StaticChart
+  options={{
+    data: [50, 100, 30],
+    thickness: 10,
+    lineType: 'smooth',
+    gradientColors: ['#ff00ff', '#00ffff'],
+    gradientDirection: 'top-to-bottom',
+  }}
+  type="linechart"
+/>
+
+</SideBySide>
 
 ## Extras
 
@@ -128,6 +197,8 @@ There's a few more things you can do with `linechart`!
 ### Multiple Lines
 
 You can also have <span className="text-purple-500 italic">multiple</span> lines! Instead of passing a single array of numbers, you can pass an array of numerical arrays, and each will become it's own line!
+
+<SideBySide>
 
 ```ts
 linechart({
@@ -141,10 +212,25 @@ linechart({
 });
 ```
 
-![](/imgs/examples/linechart/ex9.svg)
+<StaticChart
+  options={{
+    data: [
+      [50, 100, 30],
+      [3, 15, 110],
+    ],
+    thickness: 3,
+    gradientColors: ['#ff00ff', '#00ffff'],
+    gradientDirection: 'top-to-bottom',
+  }}
+  type="linechart"
+/>
+
+</SideBySide>
 
 You can also pass various options as an array as well, which will target the corresponding line!
 Check out the `linechart` <Link to="/toomanycharts/docs/charts-api/linechart">API page</Link> for supported options, anything that has a type of `T | T[]` (as in, the type, or an array of that type) can be used in this way.
+
+<SideBySide>
 
 ```ts
 linechart({
@@ -158,7 +244,20 @@ linechart({
 });
 ```
 
-![](/imgs/examples/linechart/ex10.svg)
+<StaticChart
+  options={{
+    data: [
+      [50, 100, 30],
+      [3, 15, 110],
+    ],
+    thickness: [3, 10],
+    gradientColors: ['#ff00ff', '#00ffff'],
+    gradientDirection: 'top-to-bottom',
+  }}
+  type="linechart"
+/>
+
+</SideBySide>
 
 ## Animation
 

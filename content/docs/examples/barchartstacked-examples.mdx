@@ -15,6 +15,8 @@ Simple usage for simple results
 
 ### Minimal Example
 
+<SideBySide>
+
 ```ts
 const myStackedChart = barchartStacked({
   data: [
@@ -27,11 +29,24 @@ const myStackedChart = barchartStacked({
 document.body.appendChild(myStackedChart);
 ```
 
-![A stacked bar chart containing three bars: the first bar has segments of 50, 100, and 30; the second has three segments of 10; and the third bar has segments of 100, 150, and 50.](/imgs/examples/barchartstacked/ex_tbcs0.svg)
+<StaticChart
+  options={{
+    data: [
+      [50, 100, 30],
+      [10, 10, 10],
+      [100, 150, 50],
+    ],
+  }}
+  type="barchartStacked"
+/>
+
+</SideBySide>
 
 ### Imbalanced Datasets
 
 The data sets don't need to match up in size, here the middle bar only has one datapoint:
+
+<SideBySide>
 
 ```ts
 barchartStacked({
@@ -39,9 +54,16 @@ barchartStacked({
 });
 ```
 
-![A stacked bar chart containing three bars: the first bar has segments of 50, 100, and 30; the second bar has only one segment of 100; and the third bar has segments of 100, 150, and 50.](/imgs/examples/barchartstacked/ex_tbcs1_different_groupsizes.svg)
+<StaticChart
+  options={{ data: [[50, 100, 30], [100], [100, 150, 50]] }}
+  type="barchartStacked"
+/>
+
+</SideBySide>
 
 ### With Labels
+
+<SideBySide>
 
 ```ts
 barchartStacked({
@@ -54,7 +76,19 @@ barchartStacked({
 });
 ```
 
-![A stacked bar chart containing three bars: the first bar has segments of 50, 100, and 30; the second has segments of 100, 15, and 30; and the third bar has segments of 100, 50, and 50. Additionally this stacked bar chart is labelled, the first bar is labelled "foo", the second "bar", and the third "baz."](/imgs/examples/barchartstacked/ex_tbcs2_withlabels.svg)
+<StaticChart
+  options={{
+    data: [
+      [50, 100, 30],
+      [100, 15, 30],
+      [100, 50, 50],
+    ],
+    labels: ['foo', 'bar', 'baz'],
+  }}
+  type="barchartStacked"
+/>
+
+</SideBySide>
 
 ## Coloring
 
@@ -63,6 +97,8 @@ Coloring stacked barcharts is just as simple as normal barcharts.
 ### Alternating Colors
 
 Colors are used in a continuos manner (1-2-3-1-2-3 etc) so you can provide as few or as many colors as you'd like.
+
+<SideBySide>
 
 ```ts
 barchartStacked({
@@ -75,11 +111,25 @@ barchartStacked({
 });
 ```
 
-![A stacked bar chart containing three bars: the first bar has segments of 50, 100, and 30; the second has segments of 100, 15, and 30; and the third bar has segments of 100, 50, and 50. Additionally each segment of the stacked bar chart is colored, in a repeating alternating sequence of red, cyan, and magenta.](/imgs/examples/barchartstacked/ex_tbcs3_withcolors.svg)
+<StaticChart
+  options={{
+    data: [
+      [50, 100, 30],
+      [100, 15, 30],
+      [100, 50, 50],
+    ],
+    colors: ['#ff00ff', '#00ffff', '#dd0547'],
+  }}
+  type="barchartStacked"
+/>
+
+</SideBySide>
 
 ### Gradients
 
 Gradients also work the same:
+
+<SideBySide>
 
 ```ts
 barchartStacked({
@@ -93,7 +143,20 @@ barchartStacked({
 });
 ```
 
-![A stacked bar chart containing three bars: the first bar has segments of 50, 100, and 30; the second has segments of 100, 15, and 30; and the third bar has segments of 100, 50, and 50. Additionally each segment of the stacked bar chart is colored, with each getting a linear gradient of magenta, cyan, and red.](/imgs/examples/barchartstacked/ex_tbcs4_gradient.svg)
+<StaticChart
+  options={{
+    data: [
+      [50, 100, 130],
+      [100, 100, 50],
+      [100, 50, 100],
+    ],
+    gradientColors: ['#ff00ff', '#00ffff', '#dd0547'],
+    gradientDirection: 'top-to-bottom',
+  }}
+  type="barchartStacked"
+/>
+
+</SideBySide>
 
 Though you'll want to be mindful of the gradient's <u className="text-purple-500 font-bold">gradientDirection</u> parameter as all segments receive the same gradient, so if it's going in the same direction as the bars longer side it will look like one continuous bar instead of segmented:
 

@@ -7,8 +7,6 @@ description: The first chart type
 
 Loads of examples!
 
-
-
 Just a reminder that `barchart` returns an SVG, so to use the output you'll want to add it to the DOM however your framework of choice handles it.
 
 <SideBySide>
@@ -29,15 +27,21 @@ document.body.setHTML(myChart);
 
 The most basic possible usage:
 
+<SideBySide>
+
 ```ts
 barchart({
   data: [50, 100, 30],
 });
 ```
 
-![The First Chart](/imgs/intro-c1.svg)
+<StaticChart options={{ data: [50, 100, 30] }} type="barchart" />
+
+</SideBySide>
 
 Adding some labels:
+
+<SideBySide>
 
 ```ts
 barchart({
@@ -46,9 +50,16 @@ barchart({
 });
 ```
 
-![Second intro chart, with labels](/imgs/intro-c2.svg)
+<StaticChart
+  options={{ data: [50, 100, 30], labels: ['1st', '2nd', '3rd'] }}
+  type="barchart"
+/>
+
+</SideBySide>
 
 And let's place it on the top:
+
+<SideBySide>
 
 ```ts
 barchart({
@@ -58,11 +69,22 @@ barchart({
 });
 ```
 
-![Third intro chart, with labels & placed on the top](/imgs/intro-c3.svg)
+<StaticChart
+  options={{
+    data: [50, 100, 30],
+    labels: ['1st', '2nd', '3rd'],
+    placement: 'top',
+  }}
+  type="barchart"
+/>
+
+</SideBySide>
 
 ## Larger Data Values
 
 If one bar is far larger than the others, the resulting zoomed out to fit the largest bar, showing a sense of scale.
+
+<SideBySide>
 
 ```ts
 barchart({
@@ -71,9 +93,16 @@ barchart({
 });
 ```
 
-![A dataset with one bar having a much larger value than the other two](/imgs/examples/barchart/tbc1_1k.svg)
+<StaticChart
+  options={{ data: [50, 1000, 100], placement: 'left' }}
+  type="barchart"
+/>
+
+</SideBySide>
 
 Placed on the top:
+
+<SideBySide>
 
 ```ts
 barchart({
@@ -82,7 +111,12 @@ barchart({
 });
 ```
 
-![A dataset with one bar having a much larger value than the other two](/imgs/examples/barchart/tbc2_1k.svg)
+<StaticChart
+  options={{ data: [50, 1000, 100], placement: 'top' }}
+  type="barchart"
+/>
+
+</SideBySide>
 
 ## Coloring
 
@@ -92,6 +126,8 @@ Adding colors is straightforward too!
 
 Below only `2` colors are provided, but `3` datapoints are given. When there are less colors than datapoints, the colors will alternate for the remaining datapoints.
 
+<SideBySide>
+
 ```ts
 barchart({
   data: [100, 50, 100],
@@ -100,13 +136,24 @@ barchart({
 });
 ```
 
-![A simple bar chart with alternating magenta & cyan colors](/imgs/examples/barchart/tbc2_colors_alternating.svg)
+<StaticChart
+  options={{
+    data: [100, 50, 100],
+    placement: 'top',
+    colors: ['#ff00ff', '#00ffff'],
+  }}
+  type="barchart"
+/>
+
+</SideBySide>
 
 ### Gradients
 
 Providing a few colors in the `gradientColors` array will result in each bar getting a linear gradient with evenly spaced stops based on the number of colors given.
 
 In the below example I've set the resulting SVG's height & width to be the same as datapoints to show the colored bars.
+
+<SideBySide>
 
 ```ts
 barchart({
@@ -119,7 +166,19 @@ barchart({
 });
 ```
 
-![A simple barchart showing a per-bar gradient](/imgs/examples/barchart/tbc1_gradient.svg)
+<StaticChart
+  options={{
+    data: [100, 100, 100],
+    placement: 'left',
+    gradientColors: ['#ff00ff', '#00ffff'],
+    gradientDirection: 'left-to-right',
+    width: 110,
+    height: 110,
+  }}
+  type="barchart"
+/>
+
+</SideBySide>
 
 The linear gradient that's created automatically spreads the color stops evenly, from the start of the array of colors to the end. So giving it two colors like above results in stops like so:
 
@@ -130,6 +189,8 @@ magenta           cyan
 ```
 
 The nice thing is that any valid CSS color should work, here's an example using `oklch` instead:
+
+<SideBySide>
 
 ```ts
 barchart({
@@ -143,11 +204,26 @@ barchart({
 });
 ```
 
-![A simple barchart showing a per-bar gradient](/imgs/examples/barchart/tbc3_gradient_oklch.svg)
+<StaticChart
+  options={{
+    data: [100, 50, 100],
+    placement: 'top',
+    gradientColors: [
+      'oklch(0.7017 0.3225 328.36)',
+      'oklch(0.9054 0.15455 194.769)',
+    ],
+    gradientDirection: 'top-to-bottom',
+  }}
+  type="barchart"
+/>
+
+</SideBySide>
 
 And another thing I added that I think is pretty cool is having a continuous gradient that's created with a bit of masking!
 
 To do this the `gradientMode` should be `"continuos"` & the `gradientDirection` can be whatever way you want it, here I've set it to match the top-side bar placement.
+
+<SideBySide>
 
 ```ts
 barchart({
@@ -162,7 +238,21 @@ barchart({
 });
 ```
 
-![A simple barchart showing a per-bar gradient](/imgs/examples/barchart/tbc4_gradient_continuous.svg)
+<StaticChart
+  options={{
+    data: [250, 50, 100, 150, 100],
+    placement: 'top',
+    gradientColors: [
+      'oklch(0.7017 0.3225 328.36)',
+      'oklch(0.9054 0.15455 194.769)',
+    ],
+    gradientDirection: 'top-to-bottom',
+    gradientMode: 'continuous',
+  }}
+  type="barchart"
+/>
+
+</SideBySide>
 
 ## Animation
 
@@ -218,7 +308,7 @@ Results in:
 <iframe
   height="400"
   width="400"
-  src="/toomanycharts/example-pages/barchart-animejs/index.html"></iframe>
+  src="/jgmc/example-pages/barchart-animejs/index.html"></iframe>
 
 #### Breakdown
 

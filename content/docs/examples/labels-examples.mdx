@@ -11,6 +11,8 @@ Labels can add a lot to a chart, and as such there are a few options to customiz
 
 The simplest label type is just plaintext, supplied as an array to the `labels` option. This is seen in each chart example page.
 
+<SideBySide>
+
 ```ts
 barchart({
   data: [50, 100, 30],
@@ -18,9 +20,16 @@ barchart({
 });
 ```
 
-![A basic barchart with labels](/imgs/examples/labels/ex1.svg)
+<StaticChart
+  options={{ data: [50, 100, 30], labels: ['1st', '2nd', '3rd'] }}
+  type="barchart"
+/>
+
+</SideBySide>
 
 The same works for line charts:
+
+<SideBySide>
 
 ```ts
 linechart({
@@ -33,9 +42,23 @@ linechart({
 });
 ```
 
-![A basic linechart with labels](/imgs/examples/labels/ex2.svg)
+<StaticChart
+  options={{
+    data: [
+      [50, 100, 40],
+      [10, 20, 5],
+      [90, 80, 70],
+    ],
+    labels: ['1st', '2nd', '3rd'],
+  }}
+  type="linechart"
+/>
+
+</SideBySide>
 
 And barchartStacked:
+
+<SideBySide>
 
 ```ts
 barchartStacked({
@@ -48,7 +71,19 @@ barchartStacked({
 });
 ```
 
-![A basic stacked barchart with labels](/imgs/examples/labels/ex3.svg)
+<StaticChart
+  options={{
+    data: [
+      [50, 100, 30],
+      [20, 40, 10],
+      [10, 20, 5],
+    ],
+    labels: ['1st', '2nd', '3rd'],
+  }}
+  type="barchartStacked"
+/>
+
+</SideBySide>
 
 ## Label Styling
 
@@ -86,6 +121,8 @@ But what if you just want datalabels? No problem! There's two options for this:
 - `dataLabels: 'literal' // or 'percentage'` - This will use the data values as labels placed on each bar/point
 - or you can pass an array of the numbers you want as labels to `labels`
 
+<SideBySide>
+
 ```ts
 barchart({
   data: [50, 100, 30],
@@ -93,9 +130,16 @@ barchart({
 });
 ```
 
-![A barchart with datalabels showing the literal values of each bar](/imgs/examples/labels/ex5.svg)
+<StaticChart
+  options={{ data: [50, 100, 30], dataLabels: 'literal' }}
+  type="barchart"
+/>
+
+</SideBySide>
 
 The "percentage" option will calculate the percentage of each bar relative to the total of all bars, and display that instead:
+
+<SideBySide>
 
 ```ts
 barchart({
@@ -104,9 +148,16 @@ barchart({
 });
 ```
 
-![A barchart with datalabels showing the percentage value of each bar](/imgs/examples/labels/ex6.svg)
+<StaticChart
+  options={{ data: [50, 100, 30], dataLabels: 'percentage' }}
+  type="barchart"
+/>
+
+</SideBySide>
 
 You can also use datalabels along with normal labels:
+
+<SideBySide>
 
 ```ts
 barchart({
@@ -116,7 +167,16 @@ barchart({
 });
 ```
 
-![A barchart with both normal labels and percentage datalabels](/imgs/examples/labels/ex7.svg)
+<StaticChart
+  options={{
+    data: [50, 100, 30],
+    dataLabels: 'percentage',
+    labels: ['A', 'B', 'C'],
+  }}
+  type="barchart"
+/>
+
+</SideBySide>
 
 ## Image Labels
 
@@ -134,6 +194,8 @@ type ImageLabel = {
 ```
 
 Let's see an example:
+
+<SideBySide>
 
 ```ts
 barchart({
@@ -161,45 +223,38 @@ barchart({
 });
 ```
 
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 300 300"
-  height="300"
-  width="300">
-  <g class="tmc-bargroup">
-    <rect height="50" width="50" y="250" x="25" fill="#ffffff"></rect>
-    <rect height="100" width="50" y="200" x="125" fill="#ffffff"></rect>
-    <rect height="30" width="50" y="270" x="225" fill="#ffffff"></rect>
-  </g>
-  <g class="tmc-image-label-group">
-    <image
-      className="tmc-image-label"
-      y="207.5"
-      x="37.5"
-      height="25"
-      width="25"
-      alt="Skull"
-      href="/toomanycharts/imgs/misc/test.jpg"></image>
-    <image
-      className="tmc-image-label"
-      y="157.5"
-      x="137.5"
-      height="25"
-      width="25"
-      alt="Skull"
-      href="/toomanycharts/imgs/misc/test.jpg"></image>
-    <image
-      className="tmc-image-label"
-      y="227.5"
-      x="237.5"
-      height="25"
-      width="25"
-      alt="Skull"
-      href="/toomanycharts/imgs/misc/test.jpg"></image>
-  </g>
-</svg>
+<StaticChart
+  options={{
+    data: [50, 100, 30],
+    imageLabels: [
+      {
+        href: '/imgs/misc/test.jpg',
+        alt: 'Skull',
+        height: 25,
+        width: 25,
+      },
+      {
+        href: '/imgs/misc/test.jpg',
+        alt: 'Skull',
+        height: 25,
+        width: 25,
+      },
+      {
+        href: '/imgs/misc/test.jpg',
+        alt: 'Skull',
+        height: 25,
+        width: 25,
+      },
+    ],
+  }}
+  type="barchart"
+/>
+
+</SideBySide>
 
 You can also add text above or below the image with the `topText` and `bottomText` properties:
+
+<SideBySide>
 
 ```ts
 linechart({
@@ -235,11 +290,47 @@ linechart({
 });
 ```
 
-![A basic linechart with image labels](/imgs/examples/labels/ex9.png)
+<StaticChart
+  options={{
+    data: [
+      [50, 50, 50, 40],
+      [80, 20, 10, 105],
+      [220, 240, 260, 280],
+    ],
+    imageLabels: [
+      {
+        href: '/imgs/misc/test.jpg',
+        alt: 'Skull',
+        height: 25,
+        width: 25,
+        topText: 'Top',
+      },
+      {
+        href: '/imgs/misc/test.jpg',
+        alt: 'Skull',
+        height: 25,
+        width: 25,
+        bottomText: 'Bottom',
+      },
+      {
+        href: '/imgs/misc/test.jpg',
+        alt: 'Skull',
+        height: 25,
+        width: 25,
+        topText: 'Top',
+        bottomText: 'Bottom',
+      },
+    ],
+  }}
+  type="linechart"
+/>
+
+</SideBySide>
 
 ## Class & Styling Options
 
 To see available class names for styling check out the various API pages for each chart type:
+
 - [BarCharts](../charts-api/barchart)
 - [LineCharts](../charts-api/linechart)
 - [Stacked BarCharts](../charts-api/barchartstacked)
