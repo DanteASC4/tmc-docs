@@ -1,11 +1,11 @@
 {
   "title": "The Lib",
-  "description": "All Things TooManyCharts",
+  "description": "All Things JGMC",
   "root": true,
   "pages": [
     "---Introduction---",
     "index",
-    "why-toomanycharts",
+    "why-jgmc",
     "roadmap",
     "changelog",
     "---Usage---",

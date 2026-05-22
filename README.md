@@ -1,6 +1,6 @@
-# `toomanycharts` docs-site
+# `jgmc` - Just Give Me Charts! Documentation Site Source
 
-This is a documentation site for the npm library [`toomanycharts`](https://github.com/DanteASC4/toomanycharts), and was created with the awesome [Fumadocs](https://github.com/fuma-nama/fumadocs) framework, powered by nextjs.
+This is a documentation site for the npm library [`jgmc`](https://github.com/DanteASC4/jgmc), and was created with the awesome [Fumadocs](https://github.com/fuma-nama/fumadocs) framework, powered by nextjs.
 
 Run development server:
 

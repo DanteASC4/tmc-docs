@@ -256,7 +256,7 @@ barchart({
 
 ## Animation
 
-Because toomanycharts outputs SVG elements, they can be animated! The <u className="text-purple-500 font-bold">caveat</u> is that to animate the individual bars, depending on what sort of animation you want to do, you'll need to change the `transform-origin` for bars after the charts created based on which side they're on. Which sounds more complicated than it is!
+Because JGMC outputs SVG strings that you can instantly turn into a valid SVG element, they can be animated! The <u className="text-purple-500 font-bold">caveat</u> is that to animate the individual bars, depending on what sort of animation you want to do, you'll need to change the `transform-origin` for bars after the charts created based on which side they're on. Which sounds more complicated than it is!
 
 ### Animejs
 
@@ -264,7 +264,7 @@ Let's look at an example, where to have the bars 'grow in' we'll need to do exac
 
 ```ts tab="script.ts" lineNumbers
 import { animate, utils } from 'animejs';
-import { barchart } from 'toomanycharts';
+import { barchart } from '@jgmc/vanilla';
 
 const growBars = () => {
   utils.set('.el-bar', {

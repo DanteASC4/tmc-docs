@@ -13,3 +13,9 @@ html {
     overflow-y: scroll;
   }
 }
+
+@keyframes mov-grad {
+  to {
+    background-position: 200% center;
+  }
+}

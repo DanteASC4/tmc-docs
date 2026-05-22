@@ -45,17 +45,27 @@ Rough list of features I'd like to add:
       - If supplied with normal text labels, placed above text. (maybe parameter for above or below?)
 - `dataLabels`, unintentionally implemented for just `linechart`
   - would be placed in the middle of bars:
+
   ```
   .-------.
   |=23=
   .-------.
   ```
+
   - above each point in a line chart
   - type would be `"literal"` or `"percentage"`
     - maybe also `"percentage-per-bar"` for bar chart stacked
   - classes & coloring etc
 
-### Framework Specific Exports
+### Framework Specific Exports - WIP as of `v0.5.0`!!
+
+**Update on this**
+
+As part of the plan I've migrated the entire lib over to scoped releases, allowing for exactly this feature - framework specific exports. I haven't yet completed a framework specific implementation, but now that the foundation is here that's coming soon!!
+
+I think in terms of order I'll do a release of both `svelte` & `react` at once, and then other frameworks after.
+
+<br />
 
 Framework specific exports like `import { barchart } from 'toomanycharts/svelte'` I think would be great as it could allow for framework specific utilization. I'm not 100% sure how this works, but I know this is nearly a requirement for usage for a lot of things I bet.
 

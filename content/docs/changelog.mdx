@@ -3,14 +3,46 @@ title: Changelog
 description: What's new?
 ---
 
+# v0.5.0
+
+<h1 className="text-center text-3xl font-extrabold lg:text-3xl 2xl:text-5xl">
+  <div className="*:my-8 bg-linear-to-r from-red-500 via-cyan-500 to-red-500 bg-size-[200%_100%] bg-clip-text text-transparent animate-[mov-grad_6s_linear_infinite] [animation-delay:-300ms] inline-block">
+    Major&nbsp;
+  </div>
+  <div className="*:my-8 bg-linear-to-r from-cyan-500 via-red-500 to-cyan-500 bg-size-[200%_100%] bg-clip-text text-transparent animate-[mov-grad_6s_linear_infinite] [animation-delay:-600ms] inline-block">
+    Update!
+  </div>
+</h1>
+
+<span className="text-rose-500 font-bold">Dev Note</span>
+
+This is the biggest update yet by far. The entire library has been migrated to a monorepo structure with scoped packages, allowing for framework specific exports, additional optimizations, and more! Framework specific exports is also the next big feature I'm working on.
+
+As such, the name of the package has changed, gone is `toomanycharts` and in is `@jgmc/...`!
+
+Previously all functionality lived under `toomanycharts`, but now the math & framework agnostic code lives in `@jgmc/core`. Additionally I had one single dependency in-use for creating charts `linkedom` which is a fantastic library, but as part of this move I've removed it & am now just using strings!
+
+This has allowed for a `3x` speed increase, a smaller bundle size, and means aside from the `@jgmc/core` package there are now zero dependencies! Additionally strings are incredibly flexible, so right out of the box `@jgmc/vanilla` is completely SSR compatible, and can technically be used anywhere you can use a string!
+
+That being said framework specific exports are still on the way, so that framework strengths can be properly utilized, but in the meantime you can use `@jgmc/vanilla` in any framework, and it's already SSR compatible!
+
+Not only that but aside from a few exceptions, everything should work pretty much the same in terms of usage, aside from the output.
+
+<span className="text-red-400 font-bold">Breaking Changes</span>
+
+- installation moved!
+  - `toomanycharts` is now `@jgmc/vanilla`
+  - `@jgmc/core` for math & framework agnostic code
+- removed `linkedom` dependency, now just using strings for charts
+- all charts under `@jgmc/vanilla` return strings
+
 # 0.2.3
 
 <span className="text-red-400 font-bold">Breaking Changes</span>
 
 - Removed `classes` option from all charts
   - replacing with sensible default classes applied to chart elements
-  - See <Link to="/toomanycharts/docs/guides/chart-classes">Charts Classes</Link> for more info
-
+  - See <Link to="/jgmc/docs/guides/chart-classes">Charts Classes</Link> for more info
 
 # 0.2.2
 
@@ -22,25 +54,22 @@ Next up I will be doing some cleanup / refinement of the codebase. Standardizing
 
 After cleanup & refinement I'll be doing work on getting framework specific exports working.
 
-
 <span className="text-green-400 font-bold">New</span>
 
 - `piechart`
-  - <Link to="/toomanycharts/docs/charts-api/piechart">API</Link>
-  - <Link to="/toomanycharts/docs/examples/piechart-examples">Examples</Link>
+  - <Link to="/jgmc/docs/charts-api/piechart">API</Link>
+  - <Link to="/jgmc/docs/examples/piechart-examples">Examples</Link>
 - `donutchart`
-  - <Link to="/toomanycharts/docs/charts-api/donutchart">API</Link>
-  - <Link to="/toomanycharts/docs/examples/donutchart-examples">Examples</Link>
+  - <Link to="/jgmc/docs/charts-api/donutchart">API</Link>
+  - <Link to="/jgmc/docs/examples/donutchart-examples">Examples</Link>
 
 <span className="text-magenta-400 font-bold">Experimental</span>
 
 Experimental features are features that are in the early stages of development, and may be subject to change or removal without a major version bump.
 
 - `asciiBarchart`
-  - <Link to="/toomanycharts/docs/charts-api/asciiBarchart">API</Link>
-  - <Link to="/toomanycharts/docs/examples/asciiBarchart-examples">
-      Examples
-    </Link>
+  - <Link to="/jgmc/docs/charts-api/asciiBarchart">API</Link>
+  - <Link to="/jgmc/docs/examples/asciiBarchart-examples">Examples</Link>
 
 # 0.2.1
 
@@ -102,8 +131,8 @@ We've got linecharts! That's right this update introduces the `linechart` functi
 <span className="text-green-400 font-bold">New</span>
 
 - `linechart`
-  - <Link to="/toomanycharts/docs/charts-api/linechart">API</Link>
-  - <Link to="/toomanycharts/docs/examples/linechart-examples">Examples</Link>
+  - <Link to="/jgmc/docs/charts-api/linechart">API</Link>
+  - <Link to="/jgmc/docs/examples/linechart-examples">Examples</Link>
 
 # 0.1.1
 

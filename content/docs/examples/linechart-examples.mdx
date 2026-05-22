@@ -228,7 +228,7 @@ linechart({
 </SideBySide>
 
 You can also pass various options as an array as well, which will target the corresponding line!
-Check out the `linechart` <Link to="/toomanycharts/docs/charts-api/linechart">API page</Link> for supported options, anything that has a type of `T | T[]` (as in, the type, or an array of that type) can be used in this way.
+Check out the `linechart` <Link to="/jgmc/docs/charts-api/linechart">API page</Link> for supported options, anything that has a type of `T | T[]` (as in, the type, or an array of that type) can be used in this way.
 
 <SideBySide>
 
@@ -269,7 +269,7 @@ Once again using my animation tool of choice, <Link to="https://animejs.com/docu
 
 ```ts tab="script.ts" lineNumbers
 import { animate, svg } from 'animejs';
-import { linechart } from 'toomanycharts';
+import { linechart } from '@jgmc/vanilla';
 
 const drawLine = () => {
   animate(svg.createDrawable('.da-line'), {
@@ -311,20 +311,20 @@ Results in:
 <iframe
   height="400"
   width="400"
-  src="/toomanycharts/example-pages/linechart-animejs-ex1/index.html"></iframe>
+  src="/jgmc/example-pages/linechart-animejs-ex1/index.html"></iframe>
 
 While making the above example I got an idea! I bet with a couple tweaks this could be used to make a cool little visual, data aside!
 
 <iframe
   height="400"
   width="500"
-  src="/toomanycharts/example-pages/linechart-animejs-ex2/index.html"></iframe>
+  src="/jgmc/example-pages/linechart-animejs-ex2/index.html"></iframe>
 
 And the code:
 
 ```ts lineNumbers
 import { animate, stagger, svg } from 'animejs';
-import { linechart } from 'toomanycharts';
+import { linechart } from '@jgmc/vanilla';
 
 const drawLine = () => {
   animate(svg.createDrawable('.da-line'), {

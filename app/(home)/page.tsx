@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'toomanycharts - Lightweight SVG Charts',
+  title: 'jgmc - Straightforward Lightweight Charts at the Speed of Data',
   description:
-    'Landing page for toomanycharts, a lightweight SVG chart library.',
+    'Landing page for jgmc, a lightweight SVG chart library.',
 };
 
 export default function HomePage() {
@@ -54,7 +54,7 @@ export default function HomePage() {
           <text y="116" x="262.5" fill="transparent" />
         </g>
       </svg>
-      <h1 className="mb-4 text-2xl font-bold">TooManyCharts</h1>
+      <h1 className="mb-4 text-2xl font-bold">Just Give Me Charts! JGMC</h1>
       <p className="text-fd-muted-foreground">
         <Link
           href="/docs"
